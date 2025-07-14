@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a8b3082b25e4acc99978c12263080d1" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="AkashGangaTravelModel.App" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Backup" Width="1.5" PointX="5.25" PointY="34.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.City" Width="1.5" PointX="9.75" PointY="26.5" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Company" Width="1.5" PointX="7.5" PointY="29.875" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Database" Width="1.5" PointX="5.25" PointY="31.25" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Department" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Designation" Width="1.5" PointX="0.75" PointY="23.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Destination" Width="1.5" PointX="7.5" PointY="38.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.District" Width="1.5" PointX="9.75" PointY="35.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Enquiry" Width="1.5" PointX="12.75" PointY="27.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.HotelCategory" Width="1.5" PointX="10.5" PointY="39" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.LoginLog" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Menu" Width="1.5" PointX="12" PointY="19" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Package" Width="1.5" PointX="9.75" PointY="30" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Page" Width="1.5" PointX="9.75" PointY="16.875" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.PageGroup" Width="1.5" PointX="7.5" PointY="12" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Role" Width="1.5" PointX="7.5" PointY="18.875" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.RoleMenu" Width="1.5" PointX="14.25" PointY="19.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Staff" Width="1.5" PointX="3" PointY="21.5" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLogin" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLoginRole" Width="1.5" PointX="9.75" PointY="21" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.State" Width="1.5" PointX="7.5" PointY="35.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.StateMaster" Width="1.5" PointX="4.75" PointY="0.75" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Backup_Staff" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_City_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_City_State" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Company_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Database_Staff" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Database_Staff1" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Staff_Department" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Staff_Designation" />
+        <AssociationConnector Association="AkashGangaTravelModel.Destination_FK" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Destination_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Destination_StaffLogin1" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Package_Destination" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_District_State" />
+        <AssociationConnector Association="AkashGangaTravelModel.CreatedBy_FK" />
+        <AssociationConnector Association="AkashGangaTravelModel.HotelCategory_FK" />
+        <AssociationConnector Association="AkashGangaTravelModel.Package_FK" />
+        <AssociationConnector Association="AkashGangaTravelModel.UpdatedBy_FK" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Menu_Menu" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Menu_Page" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Menu_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_RoleMenu_Menu" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Package_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Package_StaffLogin1" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Page_PageGroup" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Page_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_PageGroup_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Role_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_RoleMenu_Role" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLoginRole_StaffLoginRole" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_RoleMenu_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Staff_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLogin_Staff" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLogin_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLogin_StaffLogin1" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLoginRole_StaffLogin" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_StaffLoginRole_StaffLogin1" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_State_StaffLogin" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

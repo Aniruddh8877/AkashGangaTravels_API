@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MamtaNetralayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="AppId" />
+    </Key>
+    <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppKey" Type="Guid" Nullable="false" />
+    <Property Name="KeyFor" Type="Byte" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Backup">
+    <Key>
+      <PropertyRef Name="BackupId" />
+    </Key>
+    <Property Name="BackupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BackupFile" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BackupStatus" Type="Byte" Nullable="false" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BackupDatabase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Backup_Staff" FromRole="Backup" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <Property Name="CityName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_City_StaffLogin" FromRole="City" ToRole="StaffLogin" />
+    <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CityName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="StateName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PinCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AlternateNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LogoPNG" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_Company_StaffLogin" FromRole="Company" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="Database">
+    <Key>
+      <PropertyRef Name="DatabaseId" />
+    </Key>
+    <Property Name="DatabaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatabaseName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Database_Staff" FromRole="Database" ToRole="Staff" />
+    <NavigationProperty Name="Staff1" Relationship="Self.FK_Database_Staff1" FromRole="Database" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_Department" FromRole="Department" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DesignationName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_Designation" FromRole="Designation" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="State" Relationship="Self.FK_District_State" FromRole="District" ToRole="State" />
+  </EntityType>
+  <EntityType Name="LoginLog">
+    <Key>
+      <PropertyRef Name="LoginLogId" />
+    </Key>
+    <Property Name="LoginLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClientBrowser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginDevice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReferrerUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginResult" Type="Byte" Nullable="false" />
+    <Property Name="LoginTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserType" Type="Byte" />
+    <Property Name="GoogleLocation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IMEINo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PageId" Type="Int32" />
+    <Property Name="MenuNo" Type="Int32" Nullable="false" />
+    <Property Name="ParentMenuId" Type="Int32" />
+    <Property Name="MenuIcon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+    <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+    <NavigationProperty Name="Page" Relationship="Self.FK_Menu_Page" FromRole="Menu" ToRole="Page" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_Menu_StaffLogin" FromRole="Menu" ToRole="StaffLogin" />
+    <NavigationProperty Name="RoleMenus" Relationship="Self.FK_RoleMenu_Menu" FromRole="Menu" ToRole="RoleMenu" />
+  </EntityType>
+  <EntityType Name="Page">
+    <Key>
+      <PropertyRef Name="PageId" />
+    </Key>
+    <Property Name="PageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PageGroupId" Type="Int32" Nullable="false" />
+    <Property Name="PageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_Page" FromRole="Page" ToRole="Menu" />
+    <NavigationProperty Name="PageGroup" Relationship="Self.FK_Page_PageGroup" FromRole="Page" ToRole="PageGroup" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_Page_StaffLogin" FromRole="Page" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="PageGroup">
+    <Key>
+      <PropertyRef Name="PageGroupId" />
+    </Key>
+    <Property Name="PageGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PageGroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Pages" Relationship="Self.FK_Page_PageGroup" FromRole="PageGroup" ToRole="Page" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_PageGroup_StaffLogin" FromRole="PageGroup" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_Role_StaffLogin" FromRole="Role" ToRole="StaffLogin" />
+    <NavigationProperty Name="RoleMenus" Relationship="Self.FK_RoleMenu_Role" FromRole="Role" ToRole="RoleMenu" />
+    <NavigationProperty Name="StaffLoginRoles" Relationship="Self.FK_StaffLoginRole_StaffLoginRole" FromRole="Role" ToRole="StaffLoginRole" />
+  </EntityType>
+  <EntityType Name="RoleMenu">
+    <Key>
+      <PropertyRef Name="RoleMenuId" />
+    </Key>
+    <Property Name="RoleMenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="MenuId" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="CanEdit" Type="Boolean" Nullable="false" />
+    <Property Name="CanDelete" Type="Boolean" Nullable="false" />
+    <Property Name="CanCreate" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Menu" Relationship="Self.FK_RoleMenu_Menu" FromRole="RoleMenu" ToRole="Menu" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_RoleMenu_Role" FromRole="RoleMenu" ToRole="Role" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_RoleMenu_StaffLogin" FromRole="RoleMenu" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="StaffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StaffCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DesignationId" Type="Int32" Nullable="false" />
+    <Property Name="StaffType" Type="Byte" Nullable="false" />
+    <Property Name="FatherName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AlternateNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Byte" />
+    <Property Name="StaffPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Qualification" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FullAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Backups" Relationship="Self.FK_Backup_Staff" FromRole="Staff" ToRole="Backup" />
+    <NavigationProperty Name="Databases" Relationship="Self.FK_Database_Staff" FromRole="Staff" ToRole="Database" />
+    <NavigationProperty Name="Databases1" Relationship="Self.FK_Database_Staff1" FromRole="Staff" ToRole="Database" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Staff_Department" FromRole="Staff" ToRole="Department" />
+    <NavigationProperty Name="Designation" Relationship="Self.FK_Staff_Designation" FromRole="Staff" ToRole="Designation" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_Staff_StaffLogin" FromRole="Staff" ToRole="StaffLogin" />
+    <NavigationProperty Name="StaffLogins" Relationship="Self.FK_StaffLogin_Staff" FromRole="Staff" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="StaffLogin">
+    <Key>
+      <PropertyRef Name="StaffLoginId" />
+    </Key>
+    <Property Name="StaffLoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_StaffLogin" FromRole="StaffLogin" ToRole="City" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK_Company_StaffLogin" FromRole="StaffLogin" ToRole="Company" />
+    <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_StaffLogin" FromRole="StaffLogin" ToRole="Menu" />
+    <NavigationProperty Name="Pages" Relationship="Self.FK_Page_StaffLogin" FromRole="StaffLogin" ToRole="Page" />
+    <NavigationProperty Name="PageGroups" Relationship="Self.FK_PageGroup_StaffLogin" FromRole="StaffLogin" ToRole="PageGroup" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Role_StaffLogin" FromRole="StaffLogin" ToRole="Role" />
+    <NavigationProperty Name="RoleMenus" Relationship="Self.FK_RoleMenu_StaffLogin" FromRole="StaffLogin" ToRole="RoleMenu" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_StaffLogin" FromRole="StaffLogin" ToRole="Staff" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_StaffLogin_Staff" FromRole="StaffLogin" ToRole="Staff" />
+    <NavigationProperty Name="StaffLogin1" Relationship="Self.FK_StaffLogin_StaffLogin" FromRole="StaffLogin" ToRole="StaffLogin1" />
+    <NavigationProperty Name="StaffLogin2" Relationship="Self.FK_StaffLogin_StaffLogin" FromRole="StaffLogin1" ToRole="StaffLogin" />
+    <NavigationProperty Name="StaffLogin11" Relationship="Self.FK_StaffLogin_StaffLogin1" FromRole="StaffLogin" ToRole="StaffLogin1" />
+    <NavigationProperty Name="StaffLogin3" Relationship="Self.FK_StaffLogin_StaffLogin1" FromRole="StaffLogin1" ToRole="StaffLogin" />
+    <NavigationProperty Name="StaffLoginRoles" Relationship="Self.FK_StaffLoginRole_StaffLogin" FromRole="StaffLogin" ToRole="StaffLoginRole" />
+    <NavigationProperty Name="StaffLoginRoles1" Relationship="Self.FK_StaffLoginRole_StaffLogin1" FromRole="StaffLogin" ToRole="StaffLoginRole" />
+    <NavigationProperty Name="States" Relationship="Self.FK_State_StaffLogin" FromRole="StaffLogin" ToRole="State" />
+  </EntityType>
+  <EntityType Name="StaffLoginRole">
+    <Key>
+      <PropertyRef Name="StaffLoginRoleId" />
+    </Key>
+    <Property Name="StaffLoginRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffLoginId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_StaffLoginRole_StaffLoginRole" FromRole="StaffLoginRole" ToRole="Role" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_StaffLoginRole_StaffLogin" FromRole="StaffLoginRole" ToRole="StaffLogin" />
+    <NavigationProperty Name="StaffLogin1" Relationship="Self.FK_StaffLoginRole_StaffLogin1" FromRole="StaffLoginRole" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateCode" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
+    <NavigationProperty Name="Districts" Relationship="Self.FK_District_State" FromRole="State" ToRole="District" />
+    <NavigationProperty Name="StaffLogin" Relationship="Self.FK_State_StaffLogin" FromRole="State" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="StateMaster">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StateCode" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK_Backup_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Backup" Type="Self.Backup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Backup">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Database_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Database" Type="Self.Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Database_Staff1">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Database" Type="Self.Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Designation">
+    <End Role="Designation" Type="Self.Designation" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designation">
+        <PropertyRef Name="DesignationId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="DesignationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="ParentMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Page">
+    <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Page">
+        <PropertyRef Name="PageId" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="PageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Page_PageGroup">
+    <End Role="PageGroup" Type="Self.PageGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Page" Type="Self.Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PageGroup">
+        <PropertyRef Name="PageGroupId" />
+      </Principal>
+      <Dependent Role="Page">
+        <PropertyRef Name="PageGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Page_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Page" Type="Self.Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Page">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PageGroup_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="PageGroup" Type="Self.PageGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="PageGroup">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Role_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Role" Type="Self.Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLoginRole">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="StaffLogin">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLogin1" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLogin1">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLogin1" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLogin1">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="StaffLoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MamtaNetralayEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Apps" EntityType="Self.App" />
+    <EntitySet Name="Backups" EntityType="Self.Backup" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Databases" EntityType="Self.Database" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Designations" EntityType="Self.Designation" />
+    <EntitySet Name="Districts" EntityType="Self.District" />
+    <EntitySet Name="LoginLogs" EntityType="Self.LoginLog" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="Pages" EntityType="Self.Page" />
+    <EntitySet Name="PageGroups" EntityType="Self.PageGroup" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RoleMenus" EntityType="Self.RoleMenu" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="StaffLogins" EntityType="Self.StaffLogin" />
+    <EntitySet Name="StaffLoginRoles" EntityType="Self.StaffLoginRole" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="StateMasters" EntityType="Self.StateMaster" />
+    <AssociationSet Name="FK_Backup_Staff" Association="Self.FK_Backup_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Backup" EntitySet="Backups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_StaffLogin" Association="Self.FK_City_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_StaffLogin" Association="Self.FK_Company_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Database_Staff" Association="Self.FK_Database_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Database" EntitySet="Databases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Database_Staff1" Association="Self.FK_Database_Staff1">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Database" EntitySet="Databases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Department" Association="Self.FK_Staff_Department">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Designation" Association="Self.FK_Staff_Designation">
+      <End Role="Designation" EntitySet="Designations" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_State" Association="Self.FK_District_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="Menu1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Page" Association="Self.FK_Menu_Page">
+      <End Role="Page" EntitySet="Pages" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_StaffLogin" Association="Self.FK_Menu_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Menu" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_Menu" Association="Self.FK_RoleMenu_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="RoleMenu" EntitySet="RoleMenus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Page_PageGroup" Association="Self.FK_Page_PageGroup">
+      <End Role="PageGroup" EntitySet="PageGroups" />
+      <End Role="Page" EntitySet="Pages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Page_StaffLogin" Association="Self.FK_Page_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Page" EntitySet="Pages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PageGroup_StaffLogin" Association="Self.FK_PageGroup_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="PageGroup" EntitySet="PageGroups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_StaffLogin" Association="Self.FK_Role_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_Role" Association="Self.FK_RoleMenu_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RoleMenu" EntitySet="RoleMenus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLoginRole" Association="Self.FK_StaffLoginRole_StaffLoginRole">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_StaffLogin" Association="Self.FK_RoleMenu_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="RoleMenu" EntitySet="RoleMenus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_StaffLogin" Association="Self.FK_Staff_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_Staff" Association="Self.FK_StaffLogin_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_StaffLogin" Association="Self.FK_StaffLogin_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="StaffLogin1" EntitySet="StaffLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_StaffLogin1" Association="Self.FK_StaffLogin_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="StaffLogin1" EntitySet="StaffLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLogin" Association="Self.FK_StaffLoginRole_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLogin1" Association="Self.FK_StaffLoginRole_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_StaffLogin" Association="Self.FK_State_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

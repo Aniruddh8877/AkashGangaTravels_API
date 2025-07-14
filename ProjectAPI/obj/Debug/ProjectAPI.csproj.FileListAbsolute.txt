@@ -1,0 +1,123 @@
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\ProjectAPI.dll.config
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\ProjectAPI.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\ProjectAPI.pdb
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Antlr3.Runtime.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\CrystalDecisions.ReportSource.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\CrystalDecisions.Shared.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Microsoft.Web.Infrastructure.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Newtonsoft.Json.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Project.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Net.Http.Formatting.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Helpers.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.WebHost.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Mvc.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Optimization.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Razor.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.Deployment.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.Razor.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\WebGrease.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Zen.Barcode.Core.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Project.pdb
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Newtonsoft.Json.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Net.Http.Formatting.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Helpers.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.WebHost.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Mvc.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Optimization.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Razor.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.Deployment.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.WebPages.Razor.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Antlr3.Runtime.pdb
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\obj\Debug\ProjectAPI.csproj.AssemblyReference.cache
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\obj\Debug\ProjectAPI.csproj.CoreCompileInputs.cache
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\obj\Debug\ProjectAPI.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\obj\Debug\ProjectAPI.pdb
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\EntityFramework.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\EntityFramework.SqlServer.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Newtonsoft.Json.Bson.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Buffers.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Memory.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Numerics.Vectors.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Threading.Tasks.Extensions.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Cors.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.Cors.dll
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Project.dll.config
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\EntityFramework.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\EntityFramework.SqlServer.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Newtonsoft.Json.Bson.pdb
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\Newtonsoft.Json.Bson.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Buffers.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Memory.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Numerics.Vectors.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Threading.Tasks.Extensions.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\bin\System.Web.Http.Cors.xml
+D:\PROJECT\Template_For_New_Project\ProjectAPI\ProjectAPI\obj\Debug\ProjectAPI.csproj.Up2Date
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\ProjectAPI.dll.config
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\ProjectAPI.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\ProjectAPI.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Antlr3.Runtime.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\CrystalDecisions.ReportSource.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\CrystalDecisions.Shared.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\EntityFramework.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\EntityFramework.SqlServer.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Newtonsoft.Json.Bson.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Newtonsoft.Json.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Project.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Buffers.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Memory.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Net.Http.Formatting.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Numerics.Vectors.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Cors.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Helpers.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.Cors.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.WebHost.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Mvc.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Optimization.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Razor.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\WebGrease.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Project.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Project.dll.config
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\EntityFramework.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\EntityFramework.SqlServer.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Newtonsoft.Json.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Newtonsoft.Json.Bson.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Newtonsoft.Json.Bson.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Buffers.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Memory.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Net.Http.Formatting.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Numerics.Vectors.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Helpers.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.Cors.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Http.WebHost.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Mvc.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Razor.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\System.Web.Optimization.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\bin\Antlr3.Runtime.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\obj\Debug\ProjectAPI.csproj.AssemblyReference.cache
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\obj\Debug\ProjectAPI.csproj.CoreCompileInputs.cache
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\obj\Debug\ProjectAPI.csproj.CopyComplete
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\obj\Debug\ProjectAPI.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\ProjectAPI\obj\Debug\ProjectAPI.pdb

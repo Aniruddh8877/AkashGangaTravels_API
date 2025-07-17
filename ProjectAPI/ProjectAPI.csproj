@@ -249,6 +249,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\api\AgentController.cs" />
+    <Compile Include="Controllers\api\BookingController.cs" />
     <Compile Include="Controllers\api\CityController.cs" />
     <Compile Include="Controllers\api\CompanyController.cs" />
     <Compile Include="Controllers\api\DepartmentController.cs" />
@@ -257,6 +259,7 @@
     <Compile Include="Controllers\api\DistrictController.cs" />
     <Compile Include="Controllers\api\EnquiryController.cs" />
     <Compile Include="Controllers\api\HotelCategoryController.cs" />
+    <Compile Include="Controllers\api\IDTypeController.cs" />
     <Compile Include="Controllers\api\MenuController.cs" />
     <Compile Include="Controllers\api\PackageController.cs" />
     <Compile Include="Controllers\api\PageController.cs" />

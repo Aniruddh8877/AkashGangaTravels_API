@@ -1,6 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="AkashGangaTravelModelStoreContainer" CdmEntityContainer="AkashGangaTravelEntities">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="AkashGangaTravelModel.Agent">
+        <MappingFragment StoreEntitySet="Agent">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AgentCode" ColumnName="AgentCode" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="AgentCompanyName" ColumnName="AgentCompanyName" />
+          <ScalarProperty Name="ContactPersonName" ColumnName="ContactPersonName" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Apps">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.App">
         <MappingFragment StoreEntitySet="App">
@@ -21,6 +34,33 @@
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="BackupFile" ColumnName="BackupFile" />
           <ScalarProperty Name="BackupId" ColumnName="BackupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
+          <ScalarProperty Name="ArivalDate" ColumnName="ArivalDate" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="NoOfDay" ColumnName="NoOfDay" />
+          <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
+          <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
+          <ScalarProperty Name="FlightOption" ColumnName="FlightOption" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,6 +156,7 @@
     <EntitySetMapping Name="Enquiries">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Enquiry">
         <MappingFragment StoreEntitySet="Enquiry">
+          <ScalarProperty Name="EnquiryCode" ColumnName="EnquiryCode" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -137,12 +178,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Guests">
+      <EntityTypeMapping TypeName="AkashGangaTravelModel.Guest">
+        <MappingFragment StoreEntitySet="Guest">
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="GSTNo" ColumnName="GSTNo" />
+          <ScalarProperty Name="IDNo" ColumnName="IDNo" />
+          <ScalarProperty Name="IDTypeId" ColumnName="IDTypeId" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="GuestName" ColumnName="GuestName" />
+          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="HotelCategories">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.HotelCategory">
         <MappingFragment StoreEntitySet="HotelCategory">
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="HotelCategoryName" ColumnName="HotelCategoryName" />
           <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IDTypes">
+      <EntityTypeMapping TypeName="AkashGangaTravelModel.IDType">
+        <MappingFragment StoreEntitySet="IDType">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IDTypeName" ColumnName="IDTypeName" />
+          <ScalarProperty Name="IDTypeId" ColumnName="IDTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

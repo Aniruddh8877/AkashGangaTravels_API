@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agent.cs">
+      <DependentUpon>AkashGanga.tt</DependentUpon>
+    </Compile>
     <Compile Include="AkashGanga.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -71,6 +74,9 @@
     </Compile>
     <Compile Include="AppData.cs" />
     <Compile Include="Backup.cs">
+      <DependentUpon>AkashGanga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Booking.cs">
       <DependentUpon>AkashGanga.tt</DependentUpon>
     </Compile>
     <Compile Include="City.cs">
@@ -103,7 +109,13 @@
       <DependentUpon>AkashGanga.tt</DependentUpon>
     </Compile>
     <Compile Include="Enumerator.cs" />
+    <Compile Include="Guest.cs">
+      <DependentUpon>AkashGanga.tt</DependentUpon>
+    </Compile>
     <Compile Include="HotelCategory.cs">
+      <DependentUpon>AkashGanga.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDType.cs">
       <DependentUpon>AkashGanga.tt</DependentUpon>
     </Compile>
     <Compile Include="LoginLog.cs">

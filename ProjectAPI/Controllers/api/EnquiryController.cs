@@ -11,6 +11,15 @@ namespace ProjectAPI.Controllers.api
     [RoutePrefix("api/Enquiry")]
     public class EnquiryController : ApiController
     {
+        public class EnquiryModel
+        {
+            public int DestinationId { get; set; }
+            public int Months { get; set; }
+            public DateTime? FromDate { get; set; }
+            public DateTime? ToDate { get; set; }
+
+        }
+
         [HttpPost]
         [Route("EnquiryList")]
         public ExpandoObject EnquiryList(RequestModel requestModel)
@@ -22,32 +31,42 @@ namespace ProjectAPI.Controllers.api
                 string appKey = HttpContext.Current.Request.Headers["AppKey"];
                 AppData.CheckAppKey(dbContext, appKey, (byte)KeyFor.Admin);
                 string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                Enquiry model = JsonConvert.DeserializeObject<Enquiry>(decryptData);
+                EnquiryModel model = JsonConvert.DeserializeObject<EnquiryModel>(decryptData);
+
 
                 var list = dbContext.Enquiries
-                     .Where(p => model.DestinationId == 0 || p.DestinationId == model.DestinationId)
-                     .Select(s => new
-                {
-                    s.EnquiryId,
-                    s.PackageId,
-                    s.Destination.DestinationName,
-                    s.Package.PackageName,
-                    s.TravelPlanDate,
-                    s.FlightOption,
-                    s.NoOfPerson,
-                    s.NoOfRoom,
-                    s.MealPlan,
-                    s.HotelCategory.HotelCategoryName,
-                    s.PrimaryGuestName,
-                    s.MoblieNo,
-                    s.AmountQuoted,
-                    s.Remarks,
-                    s.EnquiryStatus,
-                    s.CreatedBy,
-                    s.CreatedOn,
-                    s.UpdatedBy,
-                    s.UpdatedOn,
-                }).ToList();
+     .Where(p =>
+         (model.DestinationId == 0 || p.DestinationId == model.DestinationId) &&
+         (model.Months == 0 || p.CreatedOn.Month == model.Months) &&
+         (!model.FromDate.HasValue || p.CreatedOn >= model.FromDate.Value) &&
+         (!model.ToDate.HasValue || p.CreatedOn <= model.ToDate.Value)
+     )
+     .Select(s => new
+     {
+         s.EnquiryId,
+         s.PackageId,
+         s.DestinationId,
+         s.HotelCategoryId,
+         s.Destination.DestinationName,
+         s.Package.PackageName,
+         s.TravelPlanDate,
+         s.FlightOption,
+         s.NoOfPerson,
+         s.NoOfRoom,
+         s.MealPlan,
+         s.HotelCategory.HotelCategoryName,
+         s.PrimaryGuestName,
+         s.MoblieNo,
+         s.AmountQuoted,
+         s.Remarks,
+         s.EnquiryStatus,
+         s.EnquiryCode,
+         s.CreatedBy,
+         s.CreatedOn,
+         s.UpdatedBy,
+         s.UpdatedOn,
+     }).ToList();
+
 
                 res.EnquiryList = list;
                 res.Message = ConstantData.SuccessMessage;
@@ -115,7 +134,8 @@ namespace ProjectAPI.Controllers.api
                             MoblieNo = model.MoblieNo,
                             NoOfPerson = model.NoOfPerson,
                             EnquiryStatus = (int)EnquiryStatus.Pending,
-                            AmountQuoted = model.AmountQuoted,
+                            AmountQuoted = model.AmountQuoted, 
+                            EnquiryCode = AppData.GenerateEnquiryCode(dbContext),
                             Remarks = model.Remarks,
                             CreatedBy = model.CreatedBy,
                             CreatedOn = DateTime.Now

@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AkashGangaTravelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="AkashGangaTravelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="AkashGangaTravelModel.Agent" />
     <EntitySet Name="Apps" EntityType="AkashGangaTravelModel.App" />
     <EntitySet Name="Backups" EntityType="AkashGangaTravelModel.Backup" />
+    <EntitySet Name="Bookings" EntityType="AkashGangaTravelModel.Booking" />
     <EntitySet Name="Cities" EntityType="AkashGangaTravelModel.City" />
     <EntitySet Name="Companies" EntityType="AkashGangaTravelModel.Company" />
     <EntitySet Name="Databases" EntityType="AkashGangaTravelModel.Database" />
@@ -11,7 +13,9 @@
     <EntitySet Name="Destinations" EntityType="AkashGangaTravelModel.Destination" />
     <EntitySet Name="Districts" EntityType="AkashGangaTravelModel.District" />
     <EntitySet Name="Enquiries" EntityType="AkashGangaTravelModel.Enquiry" />
+    <EntitySet Name="Guests" EntityType="AkashGangaTravelModel.Guest" />
     <EntitySet Name="HotelCategories" EntityType="AkashGangaTravelModel.HotelCategory" />
+    <EntitySet Name="IDTypes" EntityType="AkashGangaTravelModel.IDType" />
     <EntitySet Name="LoginLogs" EntityType="AkashGangaTravelModel.LoginLog" />
     <EntitySet Name="Menus" EntityType="AkashGangaTravelModel.Menu" />
     <EntitySet Name="Packages" EntityType="AkashGangaTravelModel.Package" />
@@ -24,9 +28,37 @@
     <EntitySet Name="StaffLoginRoles" EntityType="AkashGangaTravelModel.StaffLoginRole" />
     <EntitySet Name="States" EntityType="AkashGangaTravelModel.State" />
     <EntitySet Name="StateMasters" EntityType="AkashGangaTravelModel.StateMaster" />
+    <AssociationSet Name="AgentId" Association="AkashGangaTravelModel.AgentId">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
     <AssociationSet Name="FK_Backup_Staff" Association="AkashGangaTravelModel.FK_Backup_Staff">
       <End Role="Staff" EntitySet="Staffs" />
       <End Role="Backup" EntitySet="Backups" />
+    </AssociationSet>
+    <AssociationSet Name="Destination_FK_" Association="AkashGangaTravelModel.Destination_FK_">
+      <End Role="Destination" EntitySet="Destinations" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="Enquiry_FK_" Association="AkashGangaTravelModel.Enquiry_FK_">
+      <End Role="Enquiry" EntitySet="Enquiries" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_StaffLogin" Association="AkashGangaTravelModel.FK_Booking_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreatedBY" Association="AkashGangaTravelModel.FK_CreatedBY">
+      <End Role="StaffLogin" EntitySet="StaffLogins" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_Booking" Association="AkashGangaTravelModel.FK_Guest_Booking">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="Guest" EntitySet="Guests" />
+    </AssociationSet>
+    <AssociationSet Name="Package_FK_" Association="AkashGangaTravelModel.Package_FK_">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="Booking" EntitySet="Bookings" />
     </AssociationSet>
     <AssociationSet Name="FK_City_StaffLogin" Association="AkashGangaTravelModel.FK_City_StaffLogin">
       <End Role="StaffLogin" EntitySet="StaffLogins" />
@@ -91,6 +123,10 @@
     <AssociationSet Name="UpdatedBy_FK" Association="AkashGangaTravelModel.UpdatedBy_FK">
       <End Role="StaffLogin" EntitySet="StaffLogins" />
       <End Role="Enquiry" EntitySet="Enquiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_IDType" Association="AkashGangaTravelModel.FK_Guest_IDType">
+      <End Role="IDType" EntitySet="IDTypes" />
+      <End Role="Guest" EntitySet="Guests" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="AkashGangaTravelModel.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menus" />
@@ -173,6 +209,19 @@
       <End Role="State" EntitySet="States" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactPersonName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AgentCompanyName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AgentCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.AgentId" FromRole="Agent" ToRole="Booking" />
+  </EntityType>
   <EntityType Name="App">
     <Key>
       <PropertyRef Name="AppId" />
@@ -194,6 +243,39 @@
     <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="BackupDatabase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Staff" Relationship="AkashGangaTravelModel.FK_Backup_Staff" FromRole="Backup" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EnquiryId" Type="Int32" Nullable="false" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AgentId" Type="Int32" Nullable="false" />
+    <Property Name="FlightOption" Type="Byte" />
+    <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DestinationId" Type="Int32" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="TravelDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NoOfDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NoOfPerson" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="BookingStatus" Type="Byte" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int32" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ArivalDate" Type="DateTime" Precision="3" />
+    <Property Name="NoOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Agent" Relationship="AkashGangaTravelModel.AgentId" FromRole="Booking" ToRole="Agent" />
+    <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Booking" ToRole="Destination" />
+    <NavigationProperty Name="Enquiry" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Booking" ToRole="Enquiry" />
+    <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.FK_Booking_StaffLogin" FromRole="Booking" ToRole="StaffLogin" />
+    <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.FK_CreatedBY" FromRole="Booking" ToRole="StaffLogin" />
+    <NavigationProperty Name="Guests" Relationship="AkashGangaTravelModel.FK_Guest_Booking" FromRole="Booking" ToRole="Guest" />
+    <NavigationProperty Name="Package" Relationship="AkashGangaTravelModel.Package_FK_" FromRole="Booking" ToRole="Package" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -275,6 +357,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Destination" ToRole="Booking" />
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.Destination_FK" FromRole="Destination" ToRole="Enquiry" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.FK_Destination_StaffLogin" FromRole="Destination" ToRole="StaffLogin" />
     <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.FK_Destination_StaffLogin1" FromRole="Destination" ToRole="StaffLogin" />
@@ -311,11 +394,30 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="EnquiryCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Enquiry" ToRole="Booking" />
     <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK" FromRole="Enquiry" ToRole="Destination" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.CreatedBy_FK" FromRole="Enquiry" ToRole="StaffLogin" />
     <NavigationProperty Name="HotelCategory" Relationship="AkashGangaTravelModel.HotelCategory_FK" FromRole="Enquiry" ToRole="HotelCategory" />
     <NavigationProperty Name="Package" Relationship="AkashGangaTravelModel.Package_FK" FromRole="Enquiry" ToRole="Package" />
     <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.UpdatedBy_FK" FromRole="Enquiry" ToRole="StaffLogin" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="GuestId" />
+    </Key>
+    <Property Name="GuestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GuestName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="IDTypeId" Type="Int32" />
+    <Property Name="IDNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookingId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Booking" Relationship="AkashGangaTravelModel.FK_Guest_Booking" FromRole="Guest" ToRole="Booking" />
+    <NavigationProperty Name="IDType" Relationship="AkashGangaTravelModel.FK_Guest_IDType" FromRole="Guest" ToRole="IDType" />
   </EntityType>
   <EntityType Name="HotelCategory">
     <Key>
@@ -325,6 +427,15 @@
     <Property Name="HotelCategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.HotelCategory_FK" FromRole="HotelCategory" ToRole="Enquiry" />
+  </EntityType>
+  <EntityType Name="IDType">
+    <Key>
+      <PropertyRef Name="IDTypeId" />
+    </Key>
+    <Property Name="IDTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTypeName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Guests" Relationship="AkashGangaTravelModel.FK_Guest_IDType" FromRole="IDType" ToRole="Guest" />
   </EntityType>
   <EntityType Name="LoginLog">
     <Key>
@@ -377,6 +488,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.Package_FK_" FromRole="Package" ToRole="Booking" />
     <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.FK_Package_Destination" FromRole="Package" ToRole="Destination" />
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.Package_FK" FromRole="Package" ToRole="Enquiry" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.FK_Package_StaffLogin" FromRole="Package" ToRole="StaffLogin" />
@@ -484,6 +596,8 @@
     <Property Name="CreatedBy" Type="Int32" />
     <Property Name="CreatedDate" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.FK_Booking_StaffLogin" FromRole="StaffLogin" ToRole="Booking" />
+    <NavigationProperty Name="Bookings1" Relationship="AkashGangaTravelModel.FK_CreatedBY" FromRole="StaffLogin" ToRole="Booking" />
     <NavigationProperty Name="Cities" Relationship="AkashGangaTravelModel.FK_City_StaffLogin" FromRole="StaffLogin" ToRole="City" />
     <NavigationProperty Name="Companies" Relationship="AkashGangaTravelModel.FK_Company_StaffLogin" FromRole="StaffLogin" ToRole="Company" />
     <NavigationProperty Name="Destinations" Relationship="AkashGangaTravelModel.FK_Destination_StaffLogin" FromRole="StaffLogin" ToRole="Destination" />
@@ -545,6 +659,18 @@
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
   </EntityType>
+  <Association Name="AgentId">
+    <End Type="AkashGangaTravelModel.Agent" Role="Agent" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Backup_Staff">
     <End Type="AkashGangaTravelModel.Staff" Role="Staff" Multiplicity="1" />
     <End Type="AkashGangaTravelModel.Backup" Role="Backup" Multiplicity="*" />
@@ -554,6 +680,78 @@
       </Principal>
       <Dependent Role="Backup">
         <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Destination_FK_">
+    <End Type="AkashGangaTravelModel.Destination" Role="Destination" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="DestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Enquiry_FK_">
+    <End Type="AkashGangaTravelModel.Enquiry" Role="Enquiry" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enquiry">
+        <PropertyRef Name="EnquiryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="EnquiryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_StaffLogin">
+    <End Type="AkashGangaTravelModel.StaffLogin" Role="StaffLogin" Multiplicity="0..1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreatedBY">
+    <End Type="AkashGangaTravelModel.StaffLogin" Role="StaffLogin" Multiplicity="0..1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_Booking">
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Guest" Role="Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Package_FK_">
+    <End Type="AkashGangaTravelModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="PackageId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -746,6 +944,18 @@
       </Principal>
       <Dependent Role="Enquiry">
         <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_IDType">
+    <End Type="AkashGangaTravelModel.IDType" Role="IDType" Multiplicity="0..1" />
+    <End Type="AkashGangaTravelModel.Guest" Role="Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDType">
+        <PropertyRef Name="IDTypeId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="IDTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

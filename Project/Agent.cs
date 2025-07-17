@@ -12,32 +12,23 @@ namespace Project
     using System;
     using System.Collections.Generic;
     
-    public partial class Package
+    public partial class Agent
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Package()
+        public Agent()
         {
             this.Bookings = new HashSet<Booking>();
-            this.Enquiries = new HashSet<Enquiry>();
         }
     
-        public int PackageId { get; set; }
-        public int DestinationId { get; set; }
-        public string PackageCode { get; set; }
-        public string PackageName { get; set; }
-        public string Description { get; set; }
+        public int AgentId { get; set; }
+        public string ContactPersonName { get; set; }
+        public string AgentCompanyName { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public string AgentCode { get; set; }
         public byte Status { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public Nullable<int> UpdatedBy { get; set; }
-        public string UpdatedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
-        public virtual Destination Destination { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Enquiry> Enquiries { get; set; }
-        public virtual StaffLogin StaffLogin { get; set; }
-        public virtual StaffLogin StaffLogin1 { get; set; }
     }
 }

@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="AkashGangaTravelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactPersonName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="AgentCompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="AgentCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
   <EntityType Name="App">
     <Key>
       <PropertyRef Name="AppId" />
@@ -20,6 +32,32 @@
     <Property Name="BackupStatus" Type="tinyint" Nullable="false" />
     <Property Name="ErrorMessage" Type="nvarchar(max)" />
     <Property Name="BackupDatabase" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EnquiryId" Type="int" Nullable="false" />
+    <Property Name="BookingDate" Type="datetime" Nullable="false" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+    <Property Name="FlightOption" Type="tinyint" />
+    <Property Name="BookingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DestinationId" Type="int" Nullable="false" />
+    <Property Name="PackageId" Type="int" Nullable="false" />
+    <Property Name="TravelDate" Type="datetime" Nullable="false" />
+    <Property Name="NoOfDay" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DepartureDate" Type="datetime" Nullable="false" />
+    <Property Name="NoOfPerson" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Rate" Type="money" Nullable="false" />
+    <Property Name="TotalAmount" Type="money" Nullable="false" />
+    <Property Name="BookingStatus" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="ArivalDate" Type="datetime" />
+    <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -125,6 +163,22 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
     <Property Name="UpdatedBy" Type="int" />
     <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="EnquiryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="GuestId" />
+    </Key>
+    <Property Name="GuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Age" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="IDTypeId" Type="int" />
+    <Property Name="IDNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="GSTNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookingId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HotelCategory">
     <Key>
@@ -132,6 +186,14 @@
     </Key>
     <Property Name="HotelCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HotelCategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IDType">
+    <Key>
+      <PropertyRef Name="IDTypeId" />
+    </Key>
+    <Property Name="IDTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="Status" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="LoginLog">
@@ -298,6 +360,18 @@
     <Property Name="UpdatedBy" Type="int" />
     <Property Name="UpdatedDate" Type="datetime" />
   </EntityType>
+  <Association Name="AgentId">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="CreatedBy_FK">
     <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
     <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
@@ -322,6 +396,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Destination_FK\">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="DestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Enquiry_FK\">
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enquiry">
+        <PropertyRef Name="EnquiryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="EnquiryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Backup_Staff">
     <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
     <End Role="Backup" Type="Self.Backup" Multiplicity="*" />
@@ -331,6 +429,18 @@
       </Principal>
       <Dependent Role="Backup">
         <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="UpdatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -367,6 +477,18 @@
       </Principal>
       <Dependent Role="Company">
         <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreatedBY">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -427,6 +549,30 @@
       </Principal>
       <Dependent Role="District">
         <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_IDType">
+    <End Role="IDType" Type="Self.IDType" Multiplicity="0..1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDType">
+        <PropertyRef Name="IDTypeId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="IDTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -734,6 +880,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Package_FK\">
+    <End Role="Package" Type="Self.Package" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="UpdatedBy_FK">
     <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
     <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
@@ -747,8 +905,10 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="AkashGangaTravelModelStoreContainer">
+    <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Backup" EntityType="Self.Backup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Database" EntityType="Self.Database" Schema="dbo" store:Type="Tables" />
@@ -757,7 +917,9 @@
     <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Enquiry" EntityType="Self.Enquiry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HotelCategory" EntityType="Self.HotelCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoginLog" EntityType="Self.LoginLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
@@ -770,6 +932,10 @@
     <EntitySet Name="StaffLoginRole" EntityType="Self.StaffLoginRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="AgentId" Association="Self.AgentId">
+      <End Role="Agent" EntitySet="Agent" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
     <AssociationSet Name="CreatedBy_FK" Association="Self.CreatedBy_FK">
       <End Role="StaffLogin" EntitySet="StaffLogin" />
       <End Role="Enquiry" EntitySet="Enquiry" />
@@ -778,9 +944,21 @@
       <End Role="Destination" EntitySet="Destination" />
       <End Role="Enquiry" EntitySet="Enquiry" />
     </AssociationSet>
+    <AssociationSet Name="Destination_FK\" Association="Self.Destination_FK\">
+      <End Role="Destination" EntitySet="Destination" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="Enquiry_FK\" Association="Self.Enquiry_FK\">
+      <End Role="Enquiry" EntitySet="Enquiry" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
     <AssociationSet Name="FK_Backup_Staff" Association="Self.FK_Backup_Staff">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="Backup" EntitySet="Backup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_StaffLogin" Association="Self.FK_Booking_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Booking" EntitySet="Booking" />
     </AssociationSet>
     <AssociationSet Name="FK_City_StaffLogin" Association="Self.FK_City_StaffLogin">
       <End Role="StaffLogin" EntitySet="StaffLogin" />
@@ -793,6 +971,10 @@
     <AssociationSet Name="FK_Company_StaffLogin" Association="Self.FK_Company_StaffLogin">
       <End Role="StaffLogin" EntitySet="StaffLogin" />
       <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreatedBY" Association="Self.FK_CreatedBY">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Booking" EntitySet="Booking" />
     </AssociationSet>
     <AssociationSet Name="FK_Database_Staff" Association="Self.FK_Database_Staff">
       <End Role="Staff" EntitySet="Staff" />
@@ -813,6 +995,14 @@
     <AssociationSet Name="FK_District_State" Association="Self.FK_District_State">
       <End Role="State" EntitySet="State" />
       <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_Booking" Association="Self.FK_Guest_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Guest" EntitySet="Guest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_IDType" Association="Self.FK_Guest_IDType">
+      <End Role="IDType" EntitySet="IDType" />
+      <End Role="Guest" EntitySet="Guest" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menu" />
@@ -913,6 +1103,10 @@
     <AssociationSet Name="Package_FK" Association="Self.Package_FK">
       <End Role="Package" EntitySet="Package" />
       <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="Package_FK\" Association="Self.Package_FK\">
+      <End Role="Package" EntitySet="Package" />
+      <End Role="Booking" EntitySet="Booking" />
     </AssociationSet>
     <AssociationSet Name="UpdatedBy_FK" Association="Self.UpdatedBy_FK">
       <End Role="StaffLogin" EntitySet="StaffLogin" />

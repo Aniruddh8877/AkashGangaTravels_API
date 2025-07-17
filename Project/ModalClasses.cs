@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 namespace Project
 {
 
+    public class BookingModel
+    {
+        public Booking GetBooking { get; set; }
+        public List<Guest> GetGuests { get; set; }
+    }
+
+
     public class ChangePasswordModel
     {
         public string CurrentPassword { get; set; }

@@ -25,8 +25,10 @@ namespace Project
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<App> Apps { get; set; }
         public virtual DbSet<Backup> Backups { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Database> Databases { get; set; }
@@ -35,7 +37,9 @@ namespace Project
         public virtual DbSet<Destination> Destinations { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Enquiry> Enquiries { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
         public virtual DbSet<HotelCategory> HotelCategories { get; set; }
+        public virtual DbSet<IDType> IDTypes { get; set; }
         public virtual DbSet<LoginLog> LoginLogs { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Package> Packages { get; set; }

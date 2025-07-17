@@ -14,6 +14,12 @@ namespace Project
     
     public partial class Enquiry
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Enquiry()
+        {
+            this.Bookings = new HashSet<Booking>();
+        }
+    
         public int EnquiryId { get; set; }
         public int DestinationId { get; set; }
         public int PackageId { get; set; }
@@ -32,7 +38,10 @@ namespace Project
         public System.DateTime CreatedOn { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public string EnquiryCode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
         public virtual Destination Destination { get; set; }
         public virtual StaffLogin StaffLogin { get; set; }
         public virtual HotelCategory HotelCategory { get; set; }

@@ -256,8 +256,8 @@
     <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DestinationId" Type="Int32" Nullable="false" />
     <Property Name="PackageId" Type="Int32" Nullable="false" />
-    <Property Name="TravelDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NoOfDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ArivalDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NoOfPerson" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
@@ -267,7 +267,6 @@
     <Property Name="CreatedOn" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-    <Property Name="ArivalDate" Type="DateTime" Precision="3" />
     <Property Name="NoOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Agent" Relationship="AkashGangaTravelModel.AgentId" FromRole="Booking" ToRole="Agent" />
     <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Booking" ToRole="Destination" />
@@ -385,7 +384,7 @@
     <Property Name="MealPlan" Type="Byte" />
     <Property Name="HotelCategoryId" Type="Int32" />
     <Property Name="PrimaryGuestName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MoblieNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
     <Property Name="NoOfPerson" Type="Int32" Nullable="false" />
     <Property Name="EnquiryStatus" Type="Byte" Nullable="false" />
     <Property Name="AmountQuoted" Type="Decimal" Precision="19" Scale="4" />

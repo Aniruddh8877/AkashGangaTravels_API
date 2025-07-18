@@ -44,6 +44,7 @@ namespace ProjectAPI.Controllers.api
      .Select(s => new
      {
          s.EnquiryId,
+         StaffName = s.StaffLogin.Staff.StaffName,
          s.PackageId,
          s.DestinationId,
          s.HotelCategoryId,
@@ -56,7 +57,7 @@ namespace ProjectAPI.Controllers.api
          s.MealPlan,
          s.HotelCategory.HotelCategoryName,
          s.PrimaryGuestName,
-         s.MoblieNo,
+         s.MobileNo,
          s.AmountQuoted,
          s.Remarks,
          s.EnquiryStatus,
@@ -72,7 +73,7 @@ namespace ProjectAPI.Controllers.api
                 res.Message = ConstantData.SuccessMessage;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 res.Message = ex.Message;
             }
@@ -111,7 +112,7 @@ namespace ProjectAPI.Controllers.api
                         enquiry.MealPlan = model.MealPlan;
                         enquiry.HotelCategoryId = model.HotelCategoryId;
                         enquiry.PrimaryGuestName = model.PrimaryGuestName;
-                        enquiry.MoblieNo = model.MoblieNo;
+                        enquiry.MobileNo = model.MobileNo;
                         enquiry.NoOfPerson = model.NoOfPerson;
                         enquiry.EnquiryStatus = model.EnquiryStatus;
                         enquiry.AmountQuoted = model.AmountQuoted;
@@ -131,10 +132,10 @@ namespace ProjectAPI.Controllers.api
                             MealPlan = model.MealPlan,
                             HotelCategoryId = model.HotelCategoryId,
                             PrimaryGuestName = model.PrimaryGuestName,
-                            MoblieNo = model.MoblieNo,
+                            MobileNo = model.MobileNo,
                             NoOfPerson = model.NoOfPerson,
                             EnquiryStatus = (int)EnquiryStatus.Pending,
-                            AmountQuoted = model.AmountQuoted, 
+                            AmountQuoted = model.AmountQuoted,
                             EnquiryCode = AppData.GenerateEnquiryCode(dbContext),
                             Remarks = model.Remarks,
                             CreatedBy = model.CreatedBy,

@@ -189,65 +189,87 @@ namespace Project
             return "PCK" + SlNo.ToString("D3");
         }
 
-        public static string GenerateEnquiryCode(AkashGangaTravelEntities dbContext)
+        public static string GenerateEnquiryCode(AkashGangaTravelEntities dataContext)
         {
-            var now = DateTime.Now;
-            string prefix = "ENQ" + now.ToString("yyMM"); // e.g., ENQ202507
-            var lastCode = dbContext.Enquiries
-                .Where(x => x.EnquiryCode.StartsWith(prefix))
-                .OrderByDescending(x => x.EnquiryId)
-                .Select(x => x.EnquiryCode)
+            string invoice = string.Empty;
+            int serialNo = 1;
+
+            string year = DateTime.Now.Date.Year.ToString().Substring(2, 2);
+            string month = DateTime.Now.Date.Month.ToString("D2");
+            string currentPrefix = "ENQ" + year + month;
+            var lastEnquiryCode = dataContext.Enquiries
+                .Where(s => s.EnquiryCode.StartsWith(currentPrefix))
+                .OrderByDescending(s => s.EnquiryId)
+                .Select(s => s.EnquiryCode)
                 .FirstOrDefault();
-            int nextNumber = 1;
-            if (!string.IsNullOrEmpty(lastCode) && lastCode.Length >= prefix.Length + 2)
+
+            if (!string.IsNullOrEmpty(lastEnquiryCode))
             {
-                string numberPart = lastCode.Substring(prefix.Length); // extract the serial (e.g., 01)
-                if (int.TryParse(numberPart, out int parsedNumber))
+                string serialPart = lastEnquiryCode.Substring(currentPrefix.Length);
+                if (int.TryParse(serialPart, out int lastSerial))
                 {
-                    nextNumber = parsedNumber + 1;
+                    serialNo = lastSerial + 1;
                 }
             }
-            string finalCode = prefix + nextNumber.ToString("D2"); // pad with 2 digits (01, 02, ...)
-            return finalCode;
+            invoice = currentPrefix + serialNo.ToString();
+            return invoice;
         }
-        public static string GenterateAgentCode(AkashGangaTravelEntities db)
+        public static string GenerateAgentCode(AkashGangaTravelEntities dataContext)
         {
-            int slNo = 1;
-            string currentYear = DateTime.Now.ToString("yy");
-            string currentMonth = DateTime.Now.ToString("MM");
-            string prefix = $"AGT{currentYear}{currentMonth}";
-            var lastAgent = db.Agents
-                .Where(x => x.AgentCode.StartsWith(prefix))
-                .OrderByDescending(x => x.AgentId)
+            string invoice = string.Empty;
+            int serialNo = 1;
+
+            string year = DateTime.Now.Date.Year.ToString().Substring(2, 2); 
+            string month = DateTime.Now.Date.Month.ToString("D2");           
+            string currentPrefix = "AGT" + year + month;                     
+            var lastAgentCode = dataContext.Agents
+                .Where(s => s.AgentCode.StartsWith(currentPrefix))
+                .OrderByDescending(s => s.AgentId)
+                .Select(s => s.AgentCode)
                 .FirstOrDefault();
-            if (lastAgent != null)
+
+            if (!string.IsNullOrEmpty(lastAgentCode))
             {
-                string lastCode = lastAgent.AgentCode.Substring(6); // get serial
-                int.TryParse(lastCode, out slNo);
-                slNo += 1;
+                string serialPart = lastAgentCode.Substring(currentPrefix.Length);
+                if (int.TryParse(serialPart, out int lastSerial))
+                {
+                    serialNo = lastSerial + 1;
+                }
             }
-            return $"{prefix}{slNo.ToString("D3")}";
+            invoice = currentPrefix + serialNo.ToString();
+            return invoice;
         }
 
-        public static string GenerateBookingCode(AkashGangaTravelEntities db)
+
+
+
+
+
+
+        public static string GenerateBookingCode(AkashGangaTravelEntities dataContext)
         {
-            int slNo = 1;
-            string currentYear = DateTime.Now.ToString("yy");
-            string currentMonth = DateTime.Now.ToString("MM");
-            string prefix = $"BK{currentYear}{currentMonth}"; 
-            var lastBooking = db.Bookings
-                .Where(x => x.BookingCode.StartsWith(prefix))
-                .OrderByDescending(x => x.BookingId) 
+            string invoice = string.Empty;
+            int serialNo = 1;
+
+            string year = DateTime.Now.Date.Year.ToString().Substring(2, 2);
+            string month = DateTime.Now.Date.Month.ToString("D2");
+            string currentPrefix = "ENQ" + year + month;
+            var lastBookingCode = dataContext.Bookings
+                .Where(s => s.BookingCode.StartsWith(currentPrefix))
+                .OrderByDescending(s => s.BookingId)
+                .Select(s => s.BookingCode)
                 .FirstOrDefault();
-            if (lastBooking != null)
+
+            if (!string.IsNullOrEmpty(lastBookingCode))
             {
-                string lastCode = lastBooking.BookingCode.Substring(prefix.Length);
-                if (int.TryParse(lastCode, out int lastSlNo))
+                string serialPart = lastBookingCode.Substring(currentPrefix.Length);
+                if (int.TryParse(serialPart, out int lastSerial))
                 {
-                    slNo = lastSlNo + 1;
+                    serialNo = lastSerial + 1;
                 }
             }
-            return $"{prefix}{slNo.ToString("D3")}";
+            invoice = currentPrefix + serialNo.ToString();
+            return invoice;
         }
 
 

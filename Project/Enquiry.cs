@@ -29,7 +29,7 @@ namespace Project
         public Nullable<byte> MealPlan { get; set; }
         public Nullable<int> HotelCategoryId { get; set; }
         public string PrimaryGuestName { get; set; }
-        public string MoblieNo { get; set; }
+        public string MobileNo { get; set; }
         public int NoOfPerson { get; set; }
         public byte EnquiryStatus { get; set; }
         public Nullable<decimal> AmountQuoted { get; set; }

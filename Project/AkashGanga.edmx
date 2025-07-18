@@ -50,8 +50,8 @@
           <Property Name="BookingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DestinationId" Type="int" Nullable="false" />
           <Property Name="PackageId" Type="int" Nullable="false" />
-          <Property Name="TravelDate" Type="datetime" Nullable="false" />
           <Property Name="NoOfDay" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArivalDate" Type="datetime" Nullable="false" />
           <Property Name="DepartureDate" Type="datetime" Nullable="false" />
           <Property Name="NoOfPerson" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Rate" Type="money" Nullable="false" />
@@ -61,7 +61,6 @@
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="UpdatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
-          <Property Name="ArivalDate" Type="datetime" />
           <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="City">
@@ -159,7 +158,7 @@
           <Property Name="MealPlan" Type="tinyint" />
           <Property Name="HotelCategoryId" Type="int" />
           <Property Name="PrimaryGuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MoblieNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="NoOfPerson" Type="int" Nullable="false" />
           <Property Name="EnquiryStatus" Type="tinyint" Nullable="false" />
           <Property Name="AmountQuoted" Type="money" />
@@ -1378,8 +1377,8 @@
           <Property Name="BookingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DestinationId" Type="Int32" Nullable="false" />
           <Property Name="PackageId" Type="Int32" Nullable="false" />
-          <Property Name="TravelDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NoOfDay" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArivalDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NoOfPerson" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
@@ -1389,7 +1388,6 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="ArivalDate" Type="DateTime" Precision="3" />
           <Property Name="NoOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Agent" Relationship="AkashGangaTravelModel.AgentId" FromRole="Booking" ToRole="Agent" />
           <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Booking" ToRole="Destination" />
@@ -1507,7 +1505,7 @@
           <Property Name="MealPlan" Type="Byte" />
           <Property Name="HotelCategoryId" Type="Int32" />
           <Property Name="PrimaryGuestName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MoblieNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Name="NoOfPerson" Type="Int32" Nullable="false" />
           <Property Name="EnquiryStatus" Type="Byte" Nullable="false" />
           <Property Name="AmountQuoted" Type="Decimal" Precision="19" Scale="4" />
@@ -2371,7 +2369,6 @@
             <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
                 <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
-                <ScalarProperty Name="ArivalDate" ColumnName="ArivalDate" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -2381,8 +2378,8 @@
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
                 <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="ArivalDate" ColumnName="ArivalDate" />
                 <ScalarProperty Name="NoOfDay" ColumnName="NoOfDay" />
-                <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
                 <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
@@ -2495,7 +2492,7 @@
                 <ScalarProperty Name="AmountQuoted" ColumnName="AmountQuoted" />
                 <ScalarProperty Name="EnquiryStatus" ColumnName="EnquiryStatus" />
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
-                <ScalarProperty Name="MoblieNo" ColumnName="MoblieNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
                 <ScalarProperty Name="PrimaryGuestName" ColumnName="PrimaryGuestName" />
                 <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
                 <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />

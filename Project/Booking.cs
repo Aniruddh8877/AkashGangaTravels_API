@@ -28,8 +28,8 @@ namespace Project
         public string BookingCode { get; set; }
         public int DestinationId { get; set; }
         public int PackageId { get; set; }
-        public System.DateTime TravelDate { get; set; }
         public string NoOfDay { get; set; }
+        public System.DateTime ArivalDate { get; set; }
         public System.DateTime DepartureDate { get; set; }
         public string NoOfPerson { get; set; }
         public decimal Rate { get; set; }
@@ -39,7 +39,6 @@ namespace Project
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
-        public Nullable<System.DateTime> ArivalDate { get; set; }
         public string NoOfRoom { get; set; }
     
         public virtual Agent Agent { get; set; }

@@ -46,11 +46,12 @@ namespace ProjectAPI.Controllers.api
                                 //booking.BookingCode = model.GetBooking.BookingCode;
                                 booking.DestinationId = model.GetBooking.DestinationId;
                                 booking.PackageId = model.GetBooking.PackageId;
-                                booking.TravelDate = model.GetBooking.TravelDate;
+                                booking.ArivalDate = model.GetBooking.ArivalDate;
                                 booking.NoOfDay = model.GetBooking.NoOfDay;
                                 booking.DepartureDate = model.GetBooking.DepartureDate;
                                 booking.NoOfPerson = model.GetBooking.NoOfPerson;
                                 booking.Rate = model.GetBooking.Rate;
+                                booking.NoOfRoom = model.GetBooking.NoOfRoom;
                                 booking.TotalAmount = model.GetBooking.TotalAmount;
                                 booking.BookingStatus = model.GetBooking.BookingStatus;
                                 booking.UpdatedBy = model.GetBooking.UpdatedBy;
@@ -63,20 +64,21 @@ namespace ProjectAPI.Controllers.api
                             // Insert new LeaveRequest
                             booking = new Booking
                             {
-                                BookingDate = model.GetBooking.BookingDate,
+                                BookingDate = DateTime.Now,
                                 EnquiryId = model.GetBooking.EnquiryId,
                                 AgentId = model.GetBooking.AgentId,
                                 FlightOption = model.GetBooking.FlightOption,
                                 BookingCode = AppData.GenerateBookingCode(dbContext),
                                 DestinationId = model.GetBooking.DestinationId,
                                 PackageId = model.GetBooking.PackageId,
-                                TravelDate = model.GetBooking.TravelDate,
+                                ArivalDate = model.GetBooking.ArivalDate,
                                 NoOfDay = model.GetBooking.NoOfDay,
                                 DepartureDate = model.GetBooking.DepartureDate,
                                 NoOfPerson = model.GetBooking.NoOfPerson,
+                                NoOfRoom = model.GetBooking.NoOfRoom,
                                 Rate = model.GetBooking.Rate,
                                 TotalAmount = model.GetBooking.TotalAmount,
-                                BookingStatus = model.GetBooking.BookingStatus, // Example: Setting to Pending
+                                BookingStatus =(int)BookingStatus.TourPending, // Example: Setting to Pending
                                 CreatedBy = model.GetBooking.CreatedBy,      
                                 CreatedOn = DateTime.Now                     
                             };                                               

@@ -41,7 +41,6 @@
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
           <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
-          <ScalarProperty Name="ArivalDate" ColumnName="ArivalDate" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -51,8 +50,8 @@
           <ScalarProperty Name="Rate" ColumnName="Rate" />
           <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
           <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="ArivalDate" ColumnName="ArivalDate" />
           <ScalarProperty Name="NoOfDay" ColumnName="NoOfDay" />
-          <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />
           <ScalarProperty Name="PackageId" ColumnName="PackageId" />
           <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
           <ScalarProperty Name="BookingCode" ColumnName="BookingCode" />
@@ -165,7 +164,7 @@
           <ScalarProperty Name="AmountQuoted" ColumnName="AmountQuoted" />
           <ScalarProperty Name="EnquiryStatus" ColumnName="EnquiryStatus" />
           <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
-          <ScalarProperty Name="MoblieNo" ColumnName="MoblieNo" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
           <ScalarProperty Name="PrimaryGuestName" ColumnName="PrimaryGuestName" />
           <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
           <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />

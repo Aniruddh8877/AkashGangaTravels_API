@@ -43,7 +43,7 @@ namespace ProjectAPI.Controllers.api
                     else
                     {
                         agent = model;
-                        agent.AgentCode = AppData.GenterateAgentCode(db); // Custom code generation
+                        agent.AgentCode = AppData.GenerateAgentCode(db); // Custom code generation
                         db.Agents.Add(model);
                     }
 

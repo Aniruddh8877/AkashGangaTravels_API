@@ -17,6 +17,7 @@ namespace Project
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HotelCategory()
         {
+            this.Bookings = new HashSet<Booking>();
             this.Enquiries = new HashSet<Enquiry>();
         }
     
@@ -24,6 +25,8 @@ namespace Project
         public string HotelCategoryName { get; set; }
         public byte Status { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enquiry> Enquiries { get; set; }
     }

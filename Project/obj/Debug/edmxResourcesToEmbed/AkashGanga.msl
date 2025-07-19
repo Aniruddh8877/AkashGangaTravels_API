@@ -40,6 +40,7 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
           <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />

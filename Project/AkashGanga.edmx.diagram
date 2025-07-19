@@ -5,37 +5,38 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4a8b3082b25e4acc99978c12263080d1" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Agent" Width="1.5" PointX="7.5" PointY="41.375" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Agent" Width="1.5" PointX="12.75" PointY="24.25" />
         <EntityTypeShape EntityType="AkashGangaTravelModel.App" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Backup" Width="1.5" PointX="5.25" PointY="39" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Booking" Width="1.5" PointX="9.75" PointY="37.875" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.City" Width="1.5" PointX="9.75" PointY="29.75" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Company" Width="1.5" PointX="7.5" PointY="47.875" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Database" Width="1.5" PointX="5.25" PointY="16" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Department" Width="1.5" PointX="0.75" PointY="27.875" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Designation" Width="1.5" PointX="0.75" PointY="24.875" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Destination" Width="1.5" PointX="7.5" PointY="53.125" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.District" Width="1.5" PointX="9.75" PointY="34.625" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Enquiry" Width="1.5" PointX="12.75" PointY="38" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Guest" Width="1.5" PointX="15" PointY="39.25" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.HotelCategory" Width="1.5" PointX="10.5" PointY="50" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.IDType" Width="1.5" PointX="12.75" PointY="45" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Backup" Width="1.5" PointX="5.25" PointY="16.25" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Booking" Width="1.5" PointX="15" PointY="26.25" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.City" Width="1.5" PointX="9.75" PointY="39.25" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Company" Width="1.5" PointX="7.5" PointY="56.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Database" Width="1.5" PointX="5.25" PointY="19.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Department" Width="1.5" PointX="0.75" PointY="25.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Designation" Width="1.5" PointX="0.75" PointY="28.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Destination" Width="1.5" PointX="7.5" PointY="23.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.District" Width="1.5" PointX="9.75" PointY="50" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Enquiry" Width="1.5" PointX="9.75" PointY="26.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Guest" Width="1.5" PointX="17.25" PointY="27.875" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.HotelCategory" Width="1.5" PointX="7.5" PointY="27.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.IDType" Width="1.5" PointX="15" PointY="23.75" />
         <EntityTypeShape EntityType="AkashGangaTravelModel.LoginLog" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Menu" Width="1.5" PointX="12" PointY="26.75" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Package" Width="1.5" PointX="9.75" PointY="45" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Page" Width="1.5" PointX="9.75" PointY="24.625" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.PageGroup" Width="1.5" PointX="7.5" PointY="19.5" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Role" Width="1.5" PointX="7.5" PointY="37.625" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.RoleMenu" Width="1.5" PointX="15.25" PointY="31.125" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.Staff" Width="1.5" PointX="3" PointY="25.625" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLogin" Width="1.5" PointX="5.25" PointY="25.25" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLoginRole" Width="1.5" PointX="12.75" PointY="32.375" />
-        <EntityTypeShape EntityType="AkashGangaTravelModel.State" Width="1.5" PointX="7.5" PointY="34.125" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Menu" Width="1.5" PointX="7.5" PointY="30.5" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Package" Width="1.5" PointX="12.75" PointY="27.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Page" Width="1.5" PointX="9.75" PointY="42.5" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.PageGroup" Width="1.5" PointX="7.5" PointY="53" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Role" Width="1.5" PointX="7.5" PointY="42.5" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.RoleMenu" Width="1.5" PointX="12.75" PointY="35.25" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.Staff" Width="1.5" PointX="3" PointY="25.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLogin" Width="1.5" PointX="5.25" PointY="28.75" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.StaffLoginRole" Width="1.5" PointX="9.75" PointY="35.625" />
+        <EntityTypeShape EntityType="AkashGangaTravelModel.State" Width="1.5" PointX="7.5" PointY="49.5" />
         <EntityTypeShape EntityType="AkashGangaTravelModel.StateMaster" Width="1.5" PointX="4.75" PointY="0.75" />
         <AssociationConnector Association="AkashGangaTravelModel.AgentId" />
         <AssociationConnector Association="AkashGangaTravelModel.FK_Backup_Staff" />
         <AssociationConnector Association="AkashGangaTravelModel.Destination_FK_" />
         <AssociationConnector Association="AkashGangaTravelModel.Enquiry_FK_" />
+        <AssociationConnector Association="AkashGangaTravelModel.FK_Booking_HotelCategory" />
         <AssociationConnector Association="AkashGangaTravelModel.FK_Booking_StaffLogin" />
         <AssociationConnector Association="AkashGangaTravelModel.FK_CreatedBY" />
         <AssociationConnector Association="AkashGangaTravelModel.FK_Guest_Booking" />

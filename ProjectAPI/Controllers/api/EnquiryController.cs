@@ -30,55 +30,48 @@ namespace ProjectAPI.Controllers.api
                 AkashGangaTravelEntities dbContext = new AkashGangaTravelEntities();
                 string appKey = HttpContext.Current.Request.Headers["AppKey"];
                 AppData.CheckAppKey(dbContext, appKey, (byte)KeyFor.Admin);
+
                 string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                EnquiryModel model = JsonConvert.DeserializeObject<EnquiryModel>(decryptData);
+                Enquiry model = JsonConvert.DeserializeObject<Enquiry>(decryptData);
 
-
-                var list = dbContext.Enquiries
-     .Where(p =>
-         (model.DestinationId == 0 || p.DestinationId == model.DestinationId) &&
-         (model.Months == 0 || p.CreatedOn.Month == model.Months) &&
-         (!model.FromDate.HasValue || p.CreatedOn >= model.FromDate.Value) &&
-         (!model.ToDate.HasValue || p.CreatedOn <= model.ToDate.Value)
-     )
-     .Select(s => new
-     {
-         s.EnquiryId,
-         StaffName = s.StaffLogin.Staff.StaffName,
-         s.PackageId,
-         s.DestinationId,
-         s.HotelCategoryId,
-         s.Destination.DestinationName,
-         s.Package.PackageName,
-         s.TravelPlanDate,
-         s.FlightOption,
-         s.NoOfPerson,
-         s.NoOfRoom,
-         s.MealPlan,
-         s.HotelCategory.HotelCategoryName,
-         s.PrimaryGuestName,
-         s.MobileNo,
-         s.AmountQuoted,
-         s.Remarks,
-         s.EnquiryStatus,
-         s.EnquiryCode,
-         s.CreatedBy,
-         s.CreatedOn,
-         s.UpdatedBy,
-         s.UpdatedOn,
-     }).ToList();
-
+                var list = dbContext.Enquiries.Select(a => new
+                {
+                    a.EnquiryId,
+                    a.EnquiryStatus,
+                    a.AmountQuoted,
+                    a.CreatedBy,
+                    a.CreatedOn,
+                    a.DestinationId,
+                   DestinationName= a.Destination.DestinationName,
+                    a.EnquiryCode,
+                    a.FlightOption,
+                    a.HotelCategoryId,
+                    HotelCategoryName=a.HotelCategory.HotelCategoryName,
+                    a.MealPlan,
+                    a.MobileNo,
+                    a.NoOfPerson,
+                    a.NoOfRoom,
+                    a.PackageId,
+                    PackageName = a.Package.PackageName,
+                    a.PrimaryGuestName,
+                    a.Remarks,
+                    a.TravelPlanDate,
+                    StaffName = a.StaffLogin.Staff.StaffName,
+                    //a.AmountQuoted,
+                }).ToList();
 
                 res.EnquiryList = list;
                 res.Message = ConstantData.SuccessMessage;
-
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 res.Message = ex.Message;
             }
             return res;
         }
+
+
+
 
         [HttpPost]
         [Route("SaveEnquriy")]

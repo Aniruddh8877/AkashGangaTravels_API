@@ -13,8 +13,8 @@ namespace ProjectAPI.Controllers.api
     public class BookingController : ApiController
     {
         [HttpPost]
-        [Route("SaveResignation")]
-        public ExpandoObject SaveResignation(RequestModel requestModel)
+        [Route("SaveBooking")]
+        public ExpandoObject SaveBooking(RequestModel requestModel)
         {
             dynamic response = new ExpandoObject();
             using (AkashGangaTravelEntities dbContext = new AkashGangaTravelEntities())
@@ -49,6 +49,7 @@ namespace ProjectAPI.Controllers.api
                                 booking.ArivalDate = model.GetBooking.ArivalDate;
                                 booking.NoOfDay = model.GetBooking.NoOfDay;
                                 booking.DepartureDate = model.GetBooking.DepartureDate;
+                                booking.HotelCategoryId = model.GetBooking.HotelCategoryId;
                                 booking.NoOfPerson = model.GetBooking.NoOfPerson;
                                 booking.Rate = model.GetBooking.Rate;
                                 booking.NoOfRoom = model.GetBooking.NoOfRoom;
@@ -70,6 +71,7 @@ namespace ProjectAPI.Controllers.api
                                 FlightOption = model.GetBooking.FlightOption,
                                 BookingCode = AppData.GenerateBookingCode(dbContext),
                                 DestinationId = model.GetBooking.DestinationId,
+                                HotelCategoryId=model.GetBooking.HotelCategoryId,
                                 PackageId = model.GetBooking.PackageId,
                                 ArivalDate = model.GetBooking.ArivalDate,
                                 NoOfDay = model.GetBooking.NoOfDay,
@@ -166,5 +168,65 @@ namespace ProjectAPI.Controllers.api
             }
             return response;
         }
+
+
+
+        [HttpPost]
+        [Route("BookingList")]
+        public ExpandoObject BookingList(RequestModel requestModel)
+        {
+            dynamic res = new ExpandoObject();
+            try
+            {
+                using (var db = new AkashGangaTravelEntities())
+                {
+                    string appKey = HttpContext.Current.Request.Headers["AppKey"];
+                    AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
+
+                    string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
+                    Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
+
+                    var list = db.Bookings.Select(a => new
+                    {
+                        a.BookingId,
+                        a.BookingCode,
+                        a.BookingDate,
+                        a.EnquiryId,
+                        EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
+                        a.AgentId,
+                        AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
+                        a.FlightOption,
+                        a.DestinationId,
+                        DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
+                        a.PackageId,
+                        PackageName = a.Package != null ? a.Package.PackageName : "",
+                       a.HotelCategoryId,
+                       HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                        a.NoOfDay,
+                        a.ArivalDate,
+                        a.DepartureDate,
+                        a.NoOfPerson,
+                        a.Rate,
+                        a.TotalAmount,
+                        a.BookingStatus,
+                        a.CreatedBy,
+                        StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null ? a.StaffLogin.Staff.StaffName : "",
+                        a.CreatedOn,
+                        a.UpdatedBy,
+                        a.UpdatedOn,
+                        a.NoOfRoom
+                    }).OrderByDescending(x => x.BookingId).ToList();
+
+                    res.BookingList = list;
+                    res.Message = ConstantData.SuccessMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Message = ex.Message;
+            }
+            return res;
+        }
+
     }
 }

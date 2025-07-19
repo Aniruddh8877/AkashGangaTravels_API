@@ -40,10 +40,12 @@ namespace Project
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public string NoOfRoom { get; set; }
+        public int HotelCategoryId { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Destination Destination { get; set; }
         public virtual Enquiry Enquiry { get; set; }
+        public virtual HotelCategory HotelCategory { get; set; }
         public virtual StaffLogin StaffLogin { get; set; }
         public virtual StaffLogin StaffLogin1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

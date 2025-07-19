@@ -253,7 +253,7 @@ namespace Project
 
             string year = DateTime.Now.Date.Year.ToString().Substring(2, 2);
             string month = DateTime.Now.Date.Month.ToString("D2");
-            string currentPrefix = "ENQ" + year + month;
+            string currentPrefix = "BKC" + year + month;
             var lastBookingCode = dataContext.Bookings
                 .Where(s => s.BookingCode.StartsWith(currentPrefix))
                 .OrderByDescending(s => s.BookingId)

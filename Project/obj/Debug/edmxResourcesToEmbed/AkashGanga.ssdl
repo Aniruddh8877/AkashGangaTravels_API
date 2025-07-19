@@ -57,6 +57,7 @@
     <Property Name="UpdatedBy" Type="int" />
     <Property Name="UpdatedOn" Type="datetime" />
     <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
+    <Property Name="HotelCategoryId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -428,6 +429,18 @@
       </Principal>
       <Dependent Role="Backup">
         <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_HotelCategory">
+    <End Role="HotelCategory" Type="Self.HotelCategory" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelCategory">
+        <PropertyRef Name="HotelCategoryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="HotelCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -954,6 +967,10 @@
     <AssociationSet Name="FK_Backup_Staff" Association="Self.FK_Backup_Staff">
       <End Role="Staff" EntitySet="Staff" />
       <End Role="Backup" EntitySet="Backup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_HotelCategory" Association="Self.FK_Booking_HotelCategory">
+      <End Role="HotelCategory" EntitySet="HotelCategory" />
+      <End Role="Booking" EntitySet="Booking" />
     </AssociationSet>
     <AssociationSet Name="FK_Booking_StaffLogin" Association="Self.FK_Booking_StaffLogin">
       <End Role="StaffLogin" EntitySet="StaffLogin" />

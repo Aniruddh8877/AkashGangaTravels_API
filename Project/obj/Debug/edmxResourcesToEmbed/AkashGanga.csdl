@@ -44,6 +44,10 @@
       <End Role="Enquiry" EntitySet="Enquiries" />
       <End Role="Booking" EntitySet="Bookings" />
     </AssociationSet>
+    <AssociationSet Name="FK_Booking_HotelCategory" Association="AkashGangaTravelModel.FK_Booking_HotelCategory">
+      <End Role="HotelCategory" EntitySet="HotelCategories" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
     <AssociationSet Name="FK_Booking_StaffLogin" Association="AkashGangaTravelModel.FK_Booking_StaffLogin">
       <End Role="StaffLogin" EntitySet="StaffLogins" />
       <End Role="Booking" EntitySet="Bookings" />
@@ -268,9 +272,11 @@
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="NoOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HotelCategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Agent" Relationship="AkashGangaTravelModel.AgentId" FromRole="Booking" ToRole="Agent" />
     <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Booking" ToRole="Destination" />
     <NavigationProperty Name="Enquiry" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Booking" ToRole="Enquiry" />
+    <NavigationProperty Name="HotelCategory" Relationship="AkashGangaTravelModel.FK_Booking_HotelCategory" FromRole="Booking" ToRole="HotelCategory" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.FK_Booking_StaffLogin" FromRole="Booking" ToRole="StaffLogin" />
     <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.FK_CreatedBY" FromRole="Booking" ToRole="StaffLogin" />
     <NavigationProperty Name="Guests" Relationship="AkashGangaTravelModel.FK_Guest_Booking" FromRole="Booking" ToRole="Guest" />
@@ -425,6 +431,7 @@
     <Property Name="HotelCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="HotelCategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.FK_Booking_HotelCategory" FromRole="HotelCategory" ToRole="Booking" />
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.HotelCategory_FK" FromRole="HotelCategory" ToRole="Enquiry" />
   </EntityType>
   <EntityType Name="IDType">
@@ -703,6 +710,18 @@
       </Principal>
       <Dependent Role="Booking">
         <PropertyRef Name="EnquiryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_HotelCategory">
+    <End Type="AkashGangaTravelModel.HotelCategory" Role="HotelCategory" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelCategory">
+        <PropertyRef Name="HotelCategoryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="HotelCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

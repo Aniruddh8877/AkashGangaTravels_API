@@ -13,6 +13,12 @@ namespace Project
         public List<Guest> GetGuests { get; set; }
     }
 
+    public class EnquiryGuestModel
+    {
+        public Enquiry GetEnquiry { get; set; }
+        public Guest GetGuests { get; set; }
+    }
+
 
     public class ChangePasswordModel
     {

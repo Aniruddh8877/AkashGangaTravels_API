@@ -12,163 +12,182 @@ namespace ProjectAPI.Controllers.api
     [RoutePrefix("api/Booking")]
     public class BookingController : ApiController
     {
+        public class BookingFilterModel
+        {
+            public int DestinationId { get; set; }
+            public int Months { get; set; }
+            public int BookingStatus { get; set; }
+
+            public int AgentId { get; set; }
+        }
+
+
         [HttpPost]
         [Route("SaveBooking")]
         public ExpandoObject SaveBooking(RequestModel requestModel)
         {
             dynamic response = new ExpandoObject();
+
             using (AkashGangaTravelEntities dbContext = new AkashGangaTravelEntities())
+            using (var transaction = dbContext.Database.BeginTransaction())
             {
-                using (var transaction = dbContext.Database.BeginTransaction())
+                try
                 {
-                    try
+                    string AppKey = HttpContext.Current.Request.Headers["AppKey"];
+                    AppData.CheckAppKey(dbContext, AppKey, (byte)KeyFor.Admin);
+
+                    var decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
+                    BookingModel model = JsonConvert.DeserializeObject<BookingModel>(decryptData);
+
+                    Booking booking;
+                    int BookingId;
+
+                    // 📝 Insert or Update Booking
+                    if (model.GetBooking.BookingId > 0)
                     {
-                        string AppKey = HttpContext.Current.Request.Headers["AppKey"];
-                        AppData.CheckAppKey(dbContext, AppKey, (byte)KeyFor.Admin);
-
-                        var decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                        BookingModel model = JsonConvert.DeserializeObject<BookingModel>(decryptData);
-
-                        Booking booking;
-                        int BookingId;
-
-                        if (model.GetBooking.BookingId > 0)
+                        booking = dbContext.Bookings.FirstOrDefault(x => x.BookingId == model.GetBooking.BookingId);
+                        if (booking != null)
                         {
-                            // Update existing LeaveRequest
-                            booking = dbContext.Bookings.FirstOrDefault(x => x.BookingId == model.GetBooking.BookingId);
-                            if ( booking!= null)
-                            {
-                                
-                                booking.BookingDate = model.GetBooking.BookingDate;
-                                booking.EnquiryId = model.GetBooking.EnquiryId;
-                                booking.AgentId = model.GetBooking.AgentId;
-                                booking.FlightOption = model.GetBooking.FlightOption;
-                                //booking.BookingCode = model.GetBooking.BookingCode;
-                                booking.DestinationId = model.GetBooking.DestinationId;
-                                booking.PackageId = model.GetBooking.PackageId;
-                                booking.ArivalDate = model.GetBooking.ArivalDate;
-                                booking.NoOfDay = model.GetBooking.NoOfDay;
-                                booking.DepartureDate = model.GetBooking.DepartureDate;
-                                booking.HotelCategoryId = model.GetBooking.HotelCategoryId;
-                                booking.NoOfPerson = model.GetBooking.NoOfPerson;
-                                booking.Rate = model.GetBooking.Rate;
-                                booking.NoOfRoom = model.GetBooking.NoOfRoom;
-                                booking.TotalAmount = model.GetBooking.TotalAmount;
-                                booking.BookingStatus = model.GetBooking.BookingStatus;
-                                booking.UpdatedBy = model.GetBooking.UpdatedBy;
-                                booking.UpdatedOn = DateTime.Now;
-                            }
-                            BookingId = model.GetBooking.BookingId;
-                        }
-                        else
-                        {
-                            // Insert new LeaveRequest
-                            booking = new Booking
-                            {
-                                BookingDate = DateTime.Now,
-                                EnquiryId = model.GetBooking.EnquiryId,
-                                AgentId = model.GetBooking.AgentId,
-                                FlightOption = model.GetBooking.FlightOption,
-                                BookingCode = AppData.GenerateBookingCode(dbContext),
-                                DestinationId = model.GetBooking.DestinationId,
-                                HotelCategoryId=model.GetBooking.HotelCategoryId,
-                                PackageId = model.GetBooking.PackageId,
-                                ArivalDate = model.GetBooking.ArivalDate,
-                                NoOfDay = model.GetBooking.NoOfDay,
-                                DepartureDate = model.GetBooking.DepartureDate,
-                                NoOfPerson = model.GetBooking.NoOfPerson,
-                                NoOfRoom = model.GetBooking.NoOfRoom,
-                                Rate = model.GetBooking.Rate,
-                                TotalAmount = model.GetBooking.TotalAmount,
-                                BookingStatus =(int)BookingStatus.TourPending, // Example: Setting to Pending
-                                CreatedBy = model.GetBooking.CreatedBy,      
-                                CreatedOn = DateTime.Now                     
-                            };                                               
-
-                            dbContext.Bookings.Add(booking);
-                            dbContext.SaveChanges();
-                            BookingId = booking.BookingId;
+                            booking.BookingDate = model.GetBooking.BookingDate;
+                            booking.EnquiryId = model.GetBooking.EnquiryId;
+                            booking.AgentId = model.GetBooking.AgentId;
+                            booking.FlightOption = model.GetBooking.FlightOption;
+                            booking.DestinationId = model.GetBooking.DestinationId;
+                            booking.PackageId = model.GetBooking.PackageId;
+                            booking.ArivalDate = model.GetBooking.ArivalDate;
+                            booking.NoOfDay = model.GetBooking.NoOfDay;
+                            booking.DepartureDate = model.GetBooking.DepartureDate;
+                            booking.HotelCategoryId = model.GetBooking.HotelCategoryId;
+                            booking.NoOfPerson = model.GetBooking.NoOfPerson;
+                            booking.Rate = model.GetBooking.Rate;
+                            booking.NoOfRoom = model.GetBooking.NoOfRoom;
+                            booking.TotalAmount = model.GetBooking.TotalAmount;
+                            booking.BookingStatus = model.GetBooking.BookingStatus;
+                            booking.MealPlan = model.GetBooking.MealPlan;
+                            booking.UpdatedBy = model.GetBooking.UpdatedBy;
+                            booking.UpdatedOn = DateTime.Now;
                         }
 
-                        if (model.GetGuests != null && model.GetGuests.Any())
+                        BookingId = model.GetBooking.BookingId;
+                    }
+                    else
+                    {
+                        booking = new Booking
                         {
-                            // Fetch existing details for this LeadId
-                            var existing = dbContext.Guests.Where(x => x.GuestId == BookingId).ToList();
-                            var incomingIds = model.GetGuests.Where(x => x.GuestId > 0).Select(x => x.GuestId).ToList();
+                            BookingDate = DateTime.Now,
+                            EnquiryId = model.GetBooking.EnquiryId,
+                            AgentId = model.GetBooking.AgentId,
+                            FlightOption = model.GetBooking.FlightOption,
+                            BookingCode = AppData.GenerateBookingCode(dbContext),
+                            DestinationId = model.GetBooking.DestinationId,
+                            HotelCategoryId = model.GetBooking.HotelCategoryId,
+                            PackageId = model.GetBooking.PackageId,
+                            ArivalDate = model.GetBooking.ArivalDate
+                            ,
+                            NoOfDay = model.GetBooking.NoOfDay,
+                            DepartureDate = model.GetBooking.DepartureDate,
+                            NoOfPerson = model.GetBooking.NoOfPerson,
+                            NoOfRoom = model.GetBooking.NoOfRoom,
+                            Rate = model.GetBooking.Rate,
+                            TotalAmount = model.GetBooking.TotalAmount,
+                            BookingStatus = (int)BookingStatus.TourPending,
+                            CreatedBy = model.GetBooking.CreatedBy,
+                            MealPlan = model.GetBooking.MealPlan,
+                            CreatedOn = DateTime.Now
+                        };
 
-                            // Delete details not present in incoming list
-                            var toDelete = existing.Where(x => !incomingIds.Contains(x.GuestId)).ToList();
-                            dbContext.Guests.RemoveRange(toDelete);
+                        dbContext.Bookings.Add(booking);
+                        dbContext.SaveChanges();
+                        BookingId = booking.BookingId;
+                    }
 
-                            foreach (var detail in model.GetGuests)
+
+                    // 👥 Handle Booking Guests (both primary and non-primary)
+                    if (model.GetGuests != null && model.GetGuests.Any())
+                    {
+                        var existing = dbContext.Guests.Where(x => x.BookingId == BookingId && x.isPrimary == false).ToList();
+                        var incomingIds = model.GetGuests.Where(x => x.GuestId > 0).Select(x => x.GuestId).ToList();
+                        var toDelete = existing.Where(x => !incomingIds.Contains(x.GuestId)).ToList();
+                        dbContext.Guests.RemoveRange(toDelete);
+
+                        foreach (var guest in model.GetGuests)
+                        {
+                            if (guest.GuestId > 0)
                             {
-                                if (detail.GuestId > 0)
+                                var existingGuest = dbContext.Guests.FirstOrDefault(x => x.GuestId == guest.GuestId);
+                                if (existingGuest != null)
                                 {
-                                    // Update existing
-                                    var existingDetail = dbContext.Guests.FirstOrDefault(x => x.GuestId == detail.GuestId);
-                                    if (existingDetail != null)
-                                    {
-
-                                        existingDetail.GuestName = detail.GuestName;
-                                        existingDetail.Title = detail.Title;
-                                        existingDetail.Age = detail.Age;
-                                        existingDetail.MobileNo = detail.MobileNo;
-                                        existingDetail.DOB = detail.DOB;
-                                        existingDetail.IDTypeId = detail.IDTypeId;
-                                        existingDetail.IDNo = detail.IDNo;
-                                        existingDetail.GSTNo = detail.GSTNo;
-                                       
-                                    }
+                                    existingGuest.Title = guest.Title;
+                                    existingGuest.GuestName = guest.GuestName;
+                                    existingGuest.MobileNo = guest.MobileNo;
+                                    existingGuest.Age = guest.Age;
+                                    existingGuest.DOB = guest.DOB;
+                                    existingGuest.IDTypeId = guest.IDTypeId;
+                                    existingGuest.IDNo = guest.IDNo;
+                                    existingGuest.GSTNo = guest.GSTNo;
+                                    existingGuest.isPrimary = guest.isPrimary;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // ✅ Check duplication for primary guest
+                                bool isPrimary = guest.isPrimary == true;
+                                bool exists = dbContext.Guests.Any(x =>
+                                    x.MobileNo == guest.MobileNo &&
+                                    x.GuestName == guest.GuestName &&
+                                    x.isPrimary == guest.isPrimary);
+
+                                // ❗ Insert only if:
+                                // - not primary OR
+                                // - is primary and doesn't already exist
+                                if (!isPrimary || (isPrimary && !exists))
                                 {
-                                    // Insert new
-                                    var newDetail = new Guest
+                                    var newGuest = new Guest
                                     {
                                         BookingId = BookingId,
-                                        GuestName = detail.GuestName,
-                                        MobileNo = detail.MobileNo,
-                                        Age = detail.Age,
-                                        DOB = detail.DOB,
-                                        IDTypeId = detail.IDTypeId,
-                                        IDNo = detail.IDNo,
-                                        GSTNo= detail.GSTNo,
-                                        Title = detail.Title,
-                                       
+                                        Title = guest.Title,
+                                        GuestName = guest.GuestName,
+                                        MobileNo = guest.MobileNo,
+                                        Age = guest.Age,
+                                        DOB = guest.DOB,
+                                        IDTypeId = guest.IDTypeId,
+                                        IDNo = guest.IDNo,
+                                        GSTNo = guest.GSTNo,
+                                        isPrimary = guest.isPrimary
                                     };
-                                    dbContext.Guests.Add(newDetail);
+
+                                    dbContext.Guests.Add(newGuest);
                                 }
                             }
-
-                            dbContext.SaveChanges();
                         }
 
-
                         dbContext.SaveChanges();
-                        transaction.Commit();
+                    }
+                    //Updating Enquiry Status 
+                    var Enquiry = dbContext.Enquiries.First(x => x.EnquiryId == booking.EnquiryId);
+                    Enquiry.EnquiryStatus = (byte)EnquiryStatus.Confirm;
+                    dbContext.SaveChanges();
 
-                        response.Message = ConstantData.SuccessMessage;
-                        response.BookingId = BookingId;
-                    }
-                    catch (DbEntityValidationException ex)
-                    {
-                        transaction.Rollback();
-                        var errorMessages = ex.EntityValidationErrors
-                            .SelectMany(x => x.ValidationErrors)
-                            .Select(x => $"Property: {x.PropertyName}, Error: {x.ErrorMessage}");
-                        string fullError = string.Join("; ", errorMessages);
-                        response.Message = fullError;
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        response.Message = ex.Message;
-                    }
+                    transaction.Commit();
+                    response.Message = ConstantData.SuccessMessage;
+                    response.BookingId = BookingId;
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    transaction.Rollback();
+                    response.Message = string.Join("; ", ex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => $"Property: {x.PropertyName}, Error: {x.ErrorMessage}"));
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    response.Message = ex.Message;
                 }
             }
+
             return response;
         }
-
 
 
         [HttpPost]
@@ -186,8 +205,10 @@ namespace ProjectAPI.Controllers.api
                     string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
                     Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
 
-                    var list = db.Bookings.Select(a => new
+                    var list = db.Bookings
+                    .Select(a => new
                     {
+                        a.ArivalDate,
                         a.BookingId,
                         a.BookingCode,
                         a.BookingDate,
@@ -200,24 +221,172 @@ namespace ProjectAPI.Controllers.api
                         DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
                         a.PackageId,
                         PackageName = a.Package != null ? a.Package.PackageName : "",
-                       a.HotelCategoryId,
-                       HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                        a.HotelCategoryId,
+                        HotelCategoryName = a.HotelCategory.HotelCategoryName,
                         a.NoOfDay,
-                        a.ArivalDate,
+                        TravelPlanDate = a.ArivalDate,
                         a.DepartureDate,
                         a.NoOfPerson,
-                        a.Rate,
+                        AmountQuoted = a.Rate,
+                        a.NoOfRoom,
+                        a.TotalAmount,
+                        a.BookingStatus,
+                        a.CreatedBy,
+                        StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
+                      ? a.StaffLogin.Staff.StaffName : "",
+                        a.CreatedOn,
+                        a.MealPlan,
+                        a.UpdatedBy,
+                        a.UpdatedOn,
+                    }).OrderByDescending(x => x.ArivalDate).ToList();
+
+
+                    res.BookingList = list;
+                    res.Message = ConstantData.SuccessMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Message = ex.Message;
+            }
+            return res;
+        }
+
+        [HttpPost]
+        [Route("ArrivalBookingList")]
+        public ExpandoObject ArrivalBookingList(RequestModel requestModel)
+        {
+            dynamic res = new ExpandoObject();
+            try
+            {
+                using (var db = new AkashGangaTravelEntities())
+                {
+                    string appKey = HttpContext.Current.Request.Headers["AppKey"];
+                    AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
+
+                    string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
+                    Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
+
+                    DateTime today = DateTime.Today; // ✅ Today’s date (ignores time)
+
+                    var list = db.Bookings
+                        .Where(a => a.ArivalDate >= today)  // ✅ Only today & future bookings
+                        .Select(a => new
+                        {
+                            a.BookingId,
+                            a.BookingCode,
+                            a.BookingDate,
+                            a.EnquiryId,
+                            a.ArivalDate,
+                            EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
+                            a.Enquiry.PrimaryGuestName,
+                            a.Enquiry.MobileNo,
+                            a.AgentId,
+                            AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
+                            a.FlightOption,
+                            a.DestinationId,
+                            DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
+                            a.PackageId,
+                            PackageName = a.Package != null ? a.Package.PackageName : "",
+                            a.HotelCategoryId,
+                            HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                            a.NoOfDay,
+                            TravelPlanDate = a.ArivalDate,
+                            a.DepartureDate,
+                            a.NoOfPerson,
+                            AmountQuoted = a.Rate,
+                            a.NoOfRoom,
+                            a.TotalAmount,
+                            a.BookingStatus,
+                            a.CreatedBy,
+                            StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
+                                ? a.StaffLogin.Staff.StaffName : "",
+                            a.CreatedOn,
+                            a.MealPlan,
+                            a.UpdatedBy,
+                            a.UpdatedOn,
+                        })
+                        .OrderBy(x => x.TravelPlanDate)   // ✅ Soonest first
+                        .ToList();
+
+                    res.ArrivalBookingList = list;
+                    res.Message = ConstantData.SuccessMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Message = ex.Message;
+            }
+            return res;
+        }
+
+        [HttpPost]
+        [Route("EditBookingList")]
+        public ExpandoObject EditBookingList(RequestModel requestModel)
+        {
+            dynamic res = new ExpandoObject();
+            try
+            {
+                using (var db = new AkashGangaTravelEntities())
+                {
+                    string appKey = HttpContext.Current.Request.Headers["AppKey"];
+                    AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
+
+                    string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
+                    Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
+
+                    var list = db.Bookings.Where(b => b.BookingId == model.BookingId).Select(a => new
+                    {
+                        a.BookingId,
+                        a.BookingCode,
+                        a.BookingDate,
+                        a.EnquiryId,
+                        EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
+                        a.Enquiry.PrimaryGuestName,
+                        a.Enquiry.MobileNo,
+                        GuestName = a.Enquiry.PrimaryGuestName,
+                        a.AgentId,
+                        AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
+                        a.FlightOption,
+                        a.DestinationId,
+                        DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
+                        a.PackageId,
+                        PackageName = a.Package != null ? a.Package.PackageName : "",
+                        a.HotelCategoryId,
+                        HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                        a.NoOfDay,
+                        TravelPlanDate = a.ArivalDate,
+                        a.DepartureDate,
+                        a.NoOfPerson,
+                        AmountQuoted = a.Rate,
+                        a.NoOfRoom,
                         a.TotalAmount,
                         a.BookingStatus,
                         a.CreatedBy,
                         StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null ? a.StaffLogin.Staff.StaffName : "",
                         a.CreatedOn,
+                        a.MealPlan,
                         a.UpdatedBy,
                         a.UpdatedOn,
-                        a.NoOfRoom
-                    }).OrderByDescending(x => x.BookingId).ToList();
+                        SearchEnquiry = a.Enquiry != null ? a.Enquiry.EnquiryCode + "-" + a.Enquiry.PrimaryGuestName + "-" + a.Enquiry.MobileNo : ""
+                    }).OrderByDescending(x => x.BookingId).First();
 
-                    res.BookingList = list;
+                    res.EditBookingList = list;
+                    var listGuest = db.Guests.Where(g => g.BookingId == model.BookingId).Select(c => new
+                    {
+                        c.GuestId,
+                        c.GuestName,
+                        c.Title,
+                        c.Age,
+                        c.MobileNo,
+                        c.DOB,
+                        c.IDTypeId,
+                        c.IDNo,
+                        c.GSTNo,
+
+                    }).OrderByDescending(x => x.GuestId).ToList();
+
+                    res.SelectedGuestDetailList = listGuest;
                     res.Message = ConstantData.SuccessMessage;
                 }
             }

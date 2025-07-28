@@ -14,18 +14,27 @@ namespace Project
     
     public partial class Guest
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Guest()
+        {
+            this.Enquiries = new HashSet<Enquiry>();
+        }
+    
         public int GuestId { get; set; }
+        public bool isPrimary { get; set; }
         public string GuestName { get; set; }
-        public string Title { get; set; }
+        public byte Title { get; set; }
         public string Age { get; set; }
         public string MobileNo { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public Nullable<int> IDTypeId { get; set; }
         public string IDNo { get; set; }
         public string GSTNo { get; set; }
-        public int BookingId { get; set; }
+        public Nullable<int> BookingId { get; set; }
     
         public virtual Booking Booking { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Enquiry> Enquiries { get; set; }
         public virtual IDType IDType { get; set; }
     }
 }

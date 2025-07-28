@@ -19,6 +19,6 @@ C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Debug\En
 C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.csproj.AssemblyReference.cache
 C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
-C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.csproj.CopyComplete
 C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.dll
 C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Debug\Project.csproj.Up2Date

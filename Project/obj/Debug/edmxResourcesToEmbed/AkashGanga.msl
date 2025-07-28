@@ -40,6 +40,7 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />
           <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
           <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -156,6 +157,7 @@
     <EntitySetMapping Name="Enquiries">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Enquiry">
         <MappingFragment StoreEntitySet="Enquiry">
+          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
           <ScalarProperty Name="EnquiryCode" ColumnName="EnquiryCode" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -167,6 +169,7 @@
           <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
           <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
           <ScalarProperty Name="PrimaryGuestName" ColumnName="PrimaryGuestName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
           <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />
           <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
@@ -190,6 +193,7 @@
           <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="GuestName" ColumnName="GuestName" />
+          <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
           <ScalarProperty Name="GuestId" ColumnName="GuestId" />
         </MappingFragment>
       </EntityTypeMapping>

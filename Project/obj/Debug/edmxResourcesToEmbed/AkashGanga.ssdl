@@ -58,6 +58,7 @@
     <Property Name="UpdatedOn" Type="datetime" />
     <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
     <Property Name="HotelCategoryId" Type="int" Nullable="false" />
+    <Property Name="MealPlan" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -153,6 +154,7 @@
     <Property Name="NoOfRoom" Type="int" />
     <Property Name="MealPlan" Type="tinyint" />
     <Property Name="HotelCategoryId" Type="int" />
+    <Property Name="Title" Type="tinyint" Nullable="false" />
     <Property Name="PrimaryGuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MobileNo" Type="nvarchar" MaxLength="13" Nullable="false" />
     <Property Name="NoOfPerson" Type="int" Nullable="false" />
@@ -164,21 +166,23 @@
     <Property Name="UpdatedBy" Type="int" />
     <Property Name="UpdatedOn" Type="datetime" />
     <Property Name="EnquiryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GuestId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Guest">
     <Key>
       <PropertyRef Name="GuestId" />
     </Key>
     <Property Name="GuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isPrimary" Type="bit" Nullable="false" />
     <Property Name="GuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="Age" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="tinyint" Nullable="false" />
+    <Property Name="Age" Type="nvarchar" MaxLength="50" />
     <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="DOB" Type="datetime" />
     <Property Name="IDTypeId" Type="int" />
     <Property Name="IDNo" Type="nvarchar" MaxLength="50" />
     <Property Name="GSTNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="BookingId" Type="int" Nullable="false" />
+    <Property Name="BookingId" Type="int" />
   </EntityType>
   <EntityType Name="HotelCategory">
     <Key>
@@ -564,8 +568,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Enquiry_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="GuestId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="GuestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Guest_Booking">
-    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
     <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Booking">
@@ -1011,6 +1027,10 @@
     <AssociationSet Name="FK_District_State" Association="Self.FK_District_State">
       <End Role="State" EntitySet="State" />
       <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enquiry_Guest" Association="Self.FK_Enquiry_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
     </AssociationSet>
     <AssociationSet Name="FK_Guest_Booking" Association="Self.FK_Guest_Booking">
       <End Role="Booking" EntitySet="Booking" />

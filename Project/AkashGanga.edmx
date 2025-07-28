@@ -63,6 +63,7 @@
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
           <Property Name="HotelCategoryId" Type="int" Nullable="false" />
+          <Property Name="MealPlan" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -158,6 +159,7 @@
           <Property Name="NoOfRoom" Type="int" />
           <Property Name="MealPlan" Type="tinyint" />
           <Property Name="HotelCategoryId" Type="int" />
+          <Property Name="Title" Type="tinyint" Nullable="false" />
           <Property Name="PrimaryGuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MobileNo" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="NoOfPerson" Type="int" Nullable="false" />
@@ -169,21 +171,23 @@
           <Property Name="UpdatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
           <Property Name="EnquiryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GuestId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Guest">
           <Key>
             <PropertyRef Name="GuestId" />
           </Key>
           <Property Name="GuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="isPrimary" Type="bit" Nullable="false" />
           <Property Name="GuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Age" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="tinyint" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="50" />
           <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="DOB" Type="datetime" />
           <Property Name="IDTypeId" Type="int" />
           <Property Name="IDNo" Type="nvarchar" MaxLength="50" />
           <Property Name="GSTNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="BookingId" Type="int" Nullable="false" />
+          <Property Name="BookingId" Type="int" />
         </EntityType>
         <EntityType Name="HotelCategory">
           <Key>
@@ -569,8 +573,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Enquiry_Guest">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+          <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Enquiry">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Guest_Booking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
           <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Booking">
@@ -1017,6 +1033,10 @@
             <End Role="State" EntitySet="State" />
             <End Role="District" EntitySet="District" />
           </AssociationSet>
+          <AssociationSet Name="FK_Enquiry_Guest" Association="Self.FK_Enquiry_Guest">
+            <End Role="Guest" EntitySet="Guest" />
+            <End Role="Enquiry" EntitySet="Enquiry" />
+          </AssociationSet>
           <AssociationSet Name="FK_Guest_Booking" Association="Self.FK_Guest_Booking">
             <End Role="Booking" EntitySet="Booking" />
             <End Role="Guest" EntitySet="Guest" />
@@ -1254,6 +1274,10 @@
             <End Role="StaffLogin" EntitySet="StaffLogins" />
             <End Role="Enquiry" EntitySet="Enquiries" />
           </AssociationSet>
+          <AssociationSet Name="FK_Enquiry_Guest" Association="AkashGangaTravelModel.FK_Enquiry_Guest">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Enquiry" EntitySet="Enquiries" />
+          </AssociationSet>
           <AssociationSet Name="HotelCategory_FK" Association="AkashGangaTravelModel.HotelCategory_FK">
             <End Role="HotelCategory" EntitySet="HotelCategories" />
             <End Role="Enquiry" EntitySet="Enquiries" />
@@ -1411,6 +1435,7 @@
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="NoOfRoom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HotelCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="MealPlan" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Agent" Relationship="AkashGangaTravelModel.AgentId" FromRole="Booking" ToRole="Agent" />
           <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK_" FromRole="Booking" ToRole="Destination" />
           <NavigationProperty Name="Enquiry" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Booking" ToRole="Enquiry" />
@@ -1527,6 +1552,7 @@
           <Property Name="NoOfRoom" Type="Int32" />
           <Property Name="MealPlan" Type="Byte" />
           <Property Name="HotelCategoryId" Type="Int32" />
+          <Property Name="Title" Type="Byte" Nullable="false" />
           <Property Name="PrimaryGuestName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
           <Property Name="NoOfPerson" Type="Int32" Nullable="false" />
@@ -1538,9 +1564,11 @@
           <Property Name="UpdatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="EnquiryCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GuestId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Enquiry" ToRole="Booking" />
           <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK" FromRole="Enquiry" ToRole="Destination" />
           <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.CreatedBy_FK" FromRole="Enquiry" ToRole="StaffLogin" />
+          <NavigationProperty Name="Guest" Relationship="AkashGangaTravelModel.FK_Enquiry_Guest" FromRole="Enquiry" ToRole="Guest" />
           <NavigationProperty Name="HotelCategory" Relationship="AkashGangaTravelModel.HotelCategory_FK" FromRole="Enquiry" ToRole="HotelCategory" />
           <NavigationProperty Name="Package" Relationship="AkashGangaTravelModel.Package_FK" FromRole="Enquiry" ToRole="Package" />
           <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.UpdatedBy_FK" FromRole="Enquiry" ToRole="StaffLogin" />
@@ -1550,16 +1578,18 @@
             <PropertyRef Name="GuestId" />
           </Key>
           <Property Name="GuestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isPrimary" Type="Boolean" Nullable="false" />
           <Property Name="GuestName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Age" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="Byte" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="DOB" Type="DateTime" Precision="3" />
           <Property Name="IDTypeId" Type="Int32" />
           <Property Name="IDNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GSTNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BookingId" Type="Int32" Nullable="false" />
+          <Property Name="BookingId" Type="Int32" />
           <NavigationProperty Name="Booking" Relationship="AkashGangaTravelModel.FK_Guest_Booking" FromRole="Guest" ToRole="Booking" />
+          <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.FK_Enquiry_Guest" FromRole="Guest" ToRole="Enquiry" />
           <NavigationProperty Name="IDType" Relationship="AkashGangaTravelModel.FK_Guest_IDType" FromRole="Guest" ToRole="IDType" />
         </EntityType>
         <EntityType Name="HotelCategory">
@@ -1888,7 +1918,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Guest_Booking">
-          <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="AkashGangaTravelModel.Booking" Role="Booking" Multiplicity="0..1" />
           <End Type="AkashGangaTravelModel.Guest" Role="Guest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Booking">
@@ -2064,6 +2094,18 @@
             </Principal>
             <Dependent Role="Enquiry">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Enquiry_Guest">
+          <End Type="AkashGangaTravelModel.Guest" Role="Guest" Multiplicity="1" />
+          <End Type="AkashGangaTravelModel.Enquiry" Role="Enquiry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Enquiry">
+              <PropertyRef Name="GuestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2404,6 +2446,7 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="AkashGangaTravelModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />
                 <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
                 <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -2520,6 +2563,7 @@
           <EntitySetMapping Name="Enquiries">
             <EntityTypeMapping TypeName="AkashGangaTravelModel.Enquiry">
               <MappingFragment StoreEntitySet="Enquiry">
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
                 <ScalarProperty Name="EnquiryCode" ColumnName="EnquiryCode" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -2531,6 +2575,7 @@
                 <ScalarProperty Name="NoOfPerson" ColumnName="NoOfPerson" />
                 <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
                 <ScalarProperty Name="PrimaryGuestName" ColumnName="PrimaryGuestName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
                 <ScalarProperty Name="MealPlan" ColumnName="MealPlan" />
                 <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
@@ -2554,6 +2599,7 @@
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="GuestName" ColumnName="GuestName" />
+                <ScalarProperty Name="isPrimary" ColumnName="isPrimary" />
                 <ScalarProperty Name="GuestId" ColumnName="GuestId" />
               </MappingFragment>
             </EntityTypeMapping>

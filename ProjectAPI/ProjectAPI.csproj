@@ -258,6 +258,7 @@
     <Compile Include="Controllers\api\DestinationController.cs" />
     <Compile Include="Controllers\api\DistrictController.cs" />
     <Compile Include="Controllers\api\EnquiryController.cs" />
+    <Compile Include="Controllers\api\GuestDetailController.cs" />
     <Compile Include="Controllers\api\HotelCategoryController.cs" />
     <Compile Include="Controllers\api\IDTypeController.cs" />
     <Compile Include="Controllers\api\MenuController.cs" />

@@ -41,6 +41,7 @@ namespace Project
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public string NoOfRoom { get; set; }
         public int HotelCategoryId { get; set; }
+        public byte MealPlan { get; set; }
     
         public virtual Agent Agent { get; set; }
         public virtual Destination Destination { get; set; }

@@ -202,85 +202,25 @@ namespace ProjectAPI.Controllers.api
                     string appKey = HttpContext.Current.Request.Headers["AppKey"];
                     AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
 
+                    // 🔐 Decrypt incoming data
                     string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                    Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
+                    BookingFilterModel model = JsonConvert.DeserializeObject<BookingFilterModel>(decryptData);
 
+                    // ✅ Apply filters including nullable CreatedOn
                     var list = db.Bookings
-                    .Select(a => new
-                    {
-                        a.ArivalDate,
-                        a.BookingId,
-                        a.BookingCode,
-                        a.BookingDate,
-                        a.EnquiryId,
-                        EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
-                        a.AgentId,
-                        AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
-                        a.FlightOption,
-                        a.DestinationId,
-                        DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
-                        a.PackageId,
-                        PackageName = a.Package != null ? a.Package.PackageName : "",
-                        a.HotelCategoryId,
-                        HotelCategoryName = a.HotelCategory.HotelCategoryName,
-                        a.NoOfDay,
-                        TravelPlanDate = a.ArivalDate,
-                        a.DepartureDate,
-                        a.NoOfPerson,
-                        AmountQuoted = a.Rate,
-                        a.NoOfRoom,
-                        a.TotalAmount,
-                        a.BookingStatus,
-                        a.CreatedBy,
-                        StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
-                      ? a.StaffLogin.Staff.StaffName : "",
-                        a.CreatedOn,
-                        a.MealPlan,
-                        a.UpdatedBy,
-                        a.UpdatedOn,
-                    }).OrderByDescending(x => x.ArivalDate).ToList();
-
-
-                    res.BookingList = list;
-                    res.Message = ConstantData.SuccessMessage;
-                }
-            }
-            catch (Exception ex)
-            {
-                res.Message = ex.Message;
-            }
-            return res;
-        }
-
-        [HttpPost]
-        [Route("ArrivalBookingList")]
-        public ExpandoObject ArrivalBookingList(RequestModel requestModel)
-        {
-            dynamic res = new ExpandoObject();
-            try
-            {
-                using (var db = new AkashGangaTravelEntities())
-                {
-                    string appKey = HttpContext.Current.Request.Headers["AppKey"];
-                    AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
-
-                    string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                    Booking model = JsonConvert.DeserializeObject<Booking>(decryptData);
-
-                    DateTime today = DateTime.Today; // ✅ Today’s date (ignores time)
-
-                    var list = db.Bookings
-                        .Where(a => a.ArivalDate >= today)  // ✅ Only today & future bookings
+                        .Where(a =>
+                            (model.DestinationId == 0 || a.DestinationId == model.DestinationId) &&
+                            (model.Months == 0 || (a.CreatedOn.HasValue && a.CreatedOn.Value.Month == model.Months)) &&
+                            (model.BookingStatus == 0 || a.BookingStatus == model.BookingStatus) &&
+                            (model.AgentId == 0 || a.AgentId == model.AgentId)
+                        )
                         .Select(a => new
                         {
                             a.BookingId,
                             a.BookingCode,
                             a.BookingDate,
                             a.EnquiryId,
-                            a.ArivalDate,
                             EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
-                            a.Enquiry.PrimaryGuestName,
-                            a.Enquiry.MobileNo,
                             a.AgentId,
                             AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
                             a.FlightOption,
@@ -299,15 +239,89 @@ namespace ProjectAPI.Controllers.api
                             a.TotalAmount,
                             a.BookingStatus,
                             a.CreatedBy,
-                            StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
-                                ? a.StaffLogin.Staff.StaffName : "",
+                            StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null ? a.StaffLogin.Staff.StaffName : "",
                             a.CreatedOn,
                             a.MealPlan,
                             a.UpdatedBy,
                             a.UpdatedOn,
                         })
-                        .OrderBy(x => x.TravelPlanDate)   // ✅ Soonest first
+                        .OrderByDescending(x => x.BookingId)
                         .ToList();
+
+                    res.BookingList = list;
+                    res.Message = ConstantData.SuccessMessage;
+                }
+            }
+            catch (Exception ex)
+            {
+                res.Message = ex.Message;
+            }
+            return res;
+        }
+
+        public class ArrivalBookingFilterModel
+        {
+            public int Months { get; set; }
+        }
+        [HttpPost]
+        [Route("ArrivalBookingList")]
+        public ExpandoObject ArrivalBookingList(RequestModel requestModel)
+        {
+            dynamic res = new ExpandoObject();
+            try
+            {
+                using (var db = new AkashGangaTravelEntities())
+                {
+                    string appKey = HttpContext.Current.Request.Headers["AppKey"];
+                    AppData.CheckAppKey(db, appKey, (byte)KeyFor.Admin);
+
+                    string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
+                    ArrivalBookingFilterModel model = JsonConvert.DeserializeObject<ArrivalBookingFilterModel>(decryptData);
+
+                    DateTime today = DateTime.Today; // ✅ Today’s date (ignores time)
+
+                    int currentMonth = DateTime.Today.Month;
+
+                    var list = db.Bookings
+                        .Where(a =>
+                            (a.ArivalDate != null && a.ArivalDate.Month == currentMonth) &&
+                            (model.Months == 0 || (a.CreatedOn.HasValue && a.CreatedOn.Value.Month == model.Months))
+                        ).Select(a => new
+                     {
+                         a.ArivalDate,
+                         a.BookingId,
+                         a.BookingCode,
+                         a.BookingDate,
+                         a.EnquiryId,
+                         EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
+                         a.AgentId,
+                         AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
+                         a.FlightOption,
+                         a.DestinationId,
+                         DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
+                         a.PackageId,
+                         PackageName = a.Package != null ? a.Package.PackageName : "",
+                         a.HotelCategoryId,
+                         HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                         a.NoOfDay,
+                         TravelPlanDate = a.ArivalDate,
+                         a.DepartureDate,
+                         a.NoOfPerson,
+                         AmountQuoted = a.Rate,
+                         a.NoOfRoom,
+                         a.TotalAmount,
+                         a.BookingStatus,
+                         a.CreatedBy,
+                         StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
+                      ? a.StaffLogin.Staff.StaffName : "",
+                         a.CreatedOn,
+                         a.MealPlan,
+                         a.UpdatedBy,
+                         a.UpdatedOn,
+                     })
+     .OrderBy(x => x.ArivalDate)   // ✅ Sorted by latest arrival date
+     .ToList();
+
 
                     res.ArrivalBookingList = list;
                     res.Message = ConstantData.SuccessMessage;

@@ -1,0 +1,1152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AkashGangaTravelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContactPersonName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="AgentCompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="AgentCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="AppId" />
+    </Key>
+    <Property Name="AppId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppKey" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="KeyFor" Type="tinyint" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Backup">
+    <Key>
+      <PropertyRef Name="BackupId" />
+    </Key>
+    <Property Name="BackupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BackupFile" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="BackupStatus" Type="tinyint" Nullable="false" />
+    <Property Name="ErrorMessage" Type="nvarchar(max)" />
+    <Property Name="BackupDatabase" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingId" />
+    </Key>
+    <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EnquiryId" Type="int" Nullable="false" />
+    <Property Name="BookingDate" Type="datetime" Nullable="false" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+    <Property Name="FlightOption" Type="tinyint" />
+    <Property Name="BookingCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DestinationId" Type="int" Nullable="false" />
+    <Property Name="PackageId" Type="int" Nullable="false" />
+    <Property Name="NoOfDay" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ArivalDate" Type="datetime" Nullable="false" />
+    <Property Name="DepartureDate" Type="datetime" Nullable="false" />
+    <Property Name="NoOfPerson" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Rate" Type="money" Nullable="false" />
+    <Property Name="TotalAmount" Type="money" Nullable="false" />
+    <Property Name="BookingStatus" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="NoOfRoom" Type="nvarchar" MaxLength="50" />
+    <Property Name="HotelCategoryId" Type="int" Nullable="false" />
+    <Property Name="MealPlan" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="150" />
+    <Property Name="CompanyAddress" Type="nvarchar" MaxLength="250" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="150" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="150" />
+    <Property Name="StateName" Type="nvarchar" MaxLength="150" />
+    <Property Name="PinCode" Type="nvarchar" MaxLength="150" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlternateNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar" MaxLength="150" />
+    <Property Name="LogoPNG" Type="nvarchar" MaxLength="150" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="150" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" Nullable="false" />
+    <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Database">
+    <Key>
+      <PropertyRef Name="DatabaseId" />
+    </Key>
+    <Property Name="DatabaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatabaseName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Designation">
+    <Key>
+      <PropertyRef Name="DesignationId" />
+    </Key>
+    <Property Name="DesignationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DesignationName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Destination">
+    <Key>
+      <PropertyRef Name="DestinationId" />
+    </Key>
+    <Property Name="DestinationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DestinationType" Type="tinyint" Nullable="false" />
+    <Property Name="DestinationName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Enquiry">
+    <Key>
+      <PropertyRef Name="EnquiryId" />
+    </Key>
+    <Property Name="EnquiryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DestinationId" Type="int" Nullable="false" />
+    <Property Name="PackageId" Type="int" Nullable="false" />
+    <Property Name="TravelPlanDate" Type="datetime" Nullable="false" />
+    <Property Name="FlightOption" Type="tinyint" Nullable="false" />
+    <Property Name="NoOfRoom" Type="int" />
+    <Property Name="MealPlan" Type="tinyint" />
+    <Property Name="HotelCategoryId" Type="int" />
+    <Property Name="Title" Type="tinyint" Nullable="false" />
+    <Property Name="PrimaryGuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="13" Nullable="false" />
+    <Property Name="NoOfPerson" Type="int" Nullable="false" />
+    <Property Name="EnquiryStatus" Type="tinyint" Nullable="false" />
+    <Property Name="AmountQuoted" Type="money" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="datetime" />
+    <Property Name="EnquiryCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GuestId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Guest">
+    <Key>
+      <PropertyRef Name="GuestId" />
+    </Key>
+    <Property Name="GuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isPrimary" Type="bit" Nullable="false" />
+    <Property Name="GuestName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="tinyint" Nullable="false" />
+    <Property Name="Age" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="DOB" Type="datetime" />
+    <Property Name="IDTypeId" Type="int" />
+    <Property Name="IDNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="GSTNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookingId" Type="int" />
+  </EntityType>
+  <EntityType Name="HotelCategory">
+    <Key>
+      <PropertyRef Name="HotelCategoryId" />
+    </Key>
+    <Property Name="HotelCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HotelCategoryName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IDType">
+    <Key>
+      <PropertyRef Name="IDTypeId" />
+    </Key>
+    <Property Name="IDTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDTypeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoginLog">
+    <Key>
+      <PropertyRef Name="LoginLogId" />
+    </Key>
+    <Property Name="LoginLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="LoginPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ClientBrowser" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LoginDevice" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReferrerUrl" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="LoginResult" Type="tinyint" Nullable="false" />
+    <Property Name="LoginTime" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UserType" Type="tinyint" />
+    <Property Name="GoogleLocation" Type="nvarchar" MaxLength="250" />
+    <Property Name="IMEINo" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="PageId" Type="int" />
+    <Property Name="MenuNo" Type="int" Nullable="false" />
+    <Property Name="ParentMenuId" Type="int" />
+    <Property Name="MenuIcon" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageId" />
+    </Key>
+    <Property Name="PackageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DestinationId" Type="int" Nullable="false" />
+    <Property Name="PackageCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="PackageName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedOn" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Page">
+    <Key>
+      <PropertyRef Name="PageId" />
+    </Key>
+    <Property Name="PageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageGroupId" Type="int" Nullable="false" />
+    <Property Name="PageName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="PageUrl" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="PageGroup">
+    <Key>
+      <PropertyRef Name="PageGroupId" />
+    </Key>
+    <Property Name="PageGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageGroupName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="RoleMenu">
+    <Key>
+      <PropertyRef Name="RoleMenuId" />
+    </Key>
+    <Property Name="RoleMenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="CanEdit" Type="bit" Nullable="false" />
+    <Property Name="CanDelete" Type="bit" Nullable="false" />
+    <Property Name="CanCreate" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="StaffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="StaffCode" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DesignationId" Type="int" Nullable="false" />
+    <Property Name="StaffType" Type="tinyint" Nullable="false" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="255" />
+    <Property Name="MobileNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="AlternateNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" MaxLength="255" />
+    <Property Name="Gender" Type="tinyint" />
+    <Property Name="StaffPhoto" Type="nvarchar" MaxLength="150" />
+    <Property Name="Qualification" Type="nvarchar" MaxLength="255" />
+    <Property Name="FullAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="JoinDate" Type="datetime" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StaffLogin">
+    <Key>
+      <PropertyRef Name="StaffLoginId" />
+    </Key>
+    <Property Name="StaffLoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="LoginPassword" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StaffLoginRole">
+    <Key>
+      <PropertyRef Name="StaffLoginRoleId" />
+    </Key>
+    <Property Name="StaffLoginRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffLoginId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="StateCode" Type="money" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="StateMaster">
+    <Key>
+      <PropertyRef Name="StateId" />
+    </Key>
+    <Property Name="StateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StateName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="StateCode" Type="money" />
+    <Property Name="Status" Type="tinyint" Nullable="false" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="AgentId">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CreatedBy_FK">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Destination_FK">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="DestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Destination_FK\">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="DestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Enquiry_FK\">
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Enquiry">
+        <PropertyRef Name="EnquiryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="EnquiryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Backup_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Backup" Type="Self.Backup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Backup">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_HotelCategory">
+    <End Role="HotelCategory" Type="Self.HotelCategory" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelCategory">
+        <PropertyRef Name="HotelCategoryId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="HotelCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Booking_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreatedBY">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Database_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Database" Type="Self.Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Database_Staff1">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Database" Type="Self.Database" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="Database">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Destination_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Destination">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Destination_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Destination">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_State">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="StateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enquiry_Guest">
+    <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Guest">
+        <PropertyRef Name="GuestId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="GuestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Guest_IDType">
+    <End Role="IDType" Type="Self.IDType" Multiplicity="0..1" />
+    <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDType">
+        <PropertyRef Name="IDTypeId" />
+      </Principal>
+      <Dependent Role="Guest">
+        <PropertyRef Name="IDTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="ParentMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Page">
+    <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Page">
+        <PropertyRef Name="PageId" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="PageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Menu">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Destination">
+    <End Role="Destination" Type="Self.Destination" Multiplicity="1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="DestinationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="Package" Type="Self.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Page_PageGroup">
+    <End Role="PageGroup" Type="Self.PageGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Page" Type="Self.Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PageGroup">
+        <PropertyRef Name="PageGroupId" />
+      </Principal>
+      <Dependent Role="Page">
+        <PropertyRef Name="PageGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Page_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Page" Type="Self.Page" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Page">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PageGroup_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="PageGroup" Type="Self.PageGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="PageGroup">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Role_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Role" Type="Self.Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleMenu_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="RoleMenu">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Designation">
+    <End Role="Designation" Type="Self.Designation" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Designation">
+        <PropertyRef Name="DesignationId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="DesignationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffId" />
+      </Principal>
+      <Dependent Role="StaffLogin">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLogin1" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLogin1">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLogin_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLogin1" Type="Self.StaffLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLogin1">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="StaffLoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLogin1">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffLoginRole_StaffLoginRole">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="StaffLoginRole" Type="Self.StaffLoginRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="StaffLoginRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_State_StaffLogin">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HotelCategory_FK">
+    <End Role="HotelCategory" Type="Self.HotelCategory" Multiplicity="0..1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HotelCategory">
+        <PropertyRef Name="HotelCategoryId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="HotelCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Package_FK">
+    <End Role="Package" Type="Self.Package" Multiplicity="1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Package_FK\">
+    <End Role="Package" Type="Self.Package" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UpdatedBy_FK">
+    <End Role="StaffLogin" Type="Self.StaffLogin" Multiplicity="0..1" />
+    <End Role="Enquiry" Type="Self.Enquiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffLogin">
+        <PropertyRef Name="StaffLoginId" />
+      </Principal>
+      <Dependent Role="Enquiry">
+        <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AkashGangaTravelModelStoreContainer">
+    <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Backup" EntityType="Self.Backup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Database" EntityType="Self.Database" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enquiry" EntityType="Self.Enquiry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HotelCategory" EntityType="Self.HotelCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDType" EntityType="Self.IDType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoginLog" EntityType="Self.LoginLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PageGroup" EntityType="Self.PageGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleMenu" EntityType="Self.RoleMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffLogin" EntityType="Self.StaffLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffLoginRole" EntityType="Self.StaffLoginRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StateMaster" EntityType="Self.StateMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="AgentId" Association="Self.AgentId">
+      <End Role="Agent" EntitySet="Agent" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="CreatedBy_FK" Association="Self.CreatedBy_FK">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="Destination_FK" Association="Self.Destination_FK">
+      <End Role="Destination" EntitySet="Destination" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="Destination_FK\" Association="Self.Destination_FK\">
+      <End Role="Destination" EntitySet="Destination" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="Enquiry_FK\" Association="Self.Enquiry_FK\">
+      <End Role="Enquiry" EntitySet="Enquiry" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Backup_Staff" Association="Self.FK_Backup_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Backup" EntitySet="Backup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_HotelCategory" Association="Self.FK_Booking_HotelCategory">
+      <End Role="HotelCategory" EntitySet="HotelCategory" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Booking_StaffLogin" Association="Self.FK_Booking_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_StaffLogin" Association="Self.FK_City_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_StaffLogin" Association="Self.FK_Company_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreatedBY" Association="Self.FK_CreatedBY">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Database_Staff" Association="Self.FK_Database_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Database" EntitySet="Database" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Database_Staff1" Association="Self.FK_Database_Staff1">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Database" EntitySet="Database" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Destination_StaffLogin" Association="Self.FK_Destination_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Destination" EntitySet="Destination" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Destination_StaffLogin1" Association="Self.FK_Destination_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Destination" EntitySet="Destination" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_State" Association="Self.FK_District_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enquiry_Guest" Association="Self.FK_Enquiry_Guest">
+      <End Role="Guest" EntitySet="Guest" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_Booking" Association="Self.FK_Guest_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Guest" EntitySet="Guest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Guest_IDType" Association="Self.FK_Guest_IDType">
+      <End Role="IDType" EntitySet="IDType" />
+      <End Role="Guest" EntitySet="Guest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Menu1" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Page" Association="Self.FK_Menu_Page">
+      <End Role="Page" EntitySet="Page" />
+      <End Role="Menu" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_StaffLogin" Association="Self.FK_Menu_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Menu" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Destination" Association="Self.FK_Package_Destination">
+      <End Role="Destination" EntitySet="Destination" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_StaffLogin" Association="Self.FK_Package_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_StaffLogin1" Association="Self.FK_Package_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Page_PageGroup" Association="Self.FK_Page_PageGroup">
+      <End Role="PageGroup" EntitySet="PageGroup" />
+      <End Role="Page" EntitySet="Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Page_StaffLogin" Association="Self.FK_Page_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Page" EntitySet="Page" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PageGroup_StaffLogin" Association="Self.FK_PageGroup_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="PageGroup" EntitySet="PageGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_StaffLogin" Association="Self.FK_Role_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Role" EntitySet="Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_Menu" Association="Self.FK_RoleMenu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="RoleMenu" EntitySet="RoleMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_Role" Association="Self.FK_RoleMenu_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RoleMenu" EntitySet="RoleMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMenu_StaffLogin" Association="Self.FK_RoleMenu_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="RoleMenu" EntitySet="RoleMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Department" Association="Self.FK_Staff_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Designation" Association="Self.FK_Staff_Designation">
+      <End Role="Designation" EntitySet="Designation" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_StaffLogin" Association="Self.FK_Staff_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_Staff" Association="Self.FK_StaffLogin_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_StaffLogin" Association="Self.FK_StaffLogin_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="StaffLogin1" EntitySet="StaffLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLogin_StaffLogin1" Association="Self.FK_StaffLogin_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="StaffLogin1" EntitySet="StaffLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLogin" Association="Self.FK_StaffLoginRole_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLogin1" Association="Self.FK_StaffLoginRole_StaffLogin1">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffLoginRole_StaffLoginRole" Association="Self.FK_StaffLoginRole_StaffLoginRole">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="StaffLoginRole" EntitySet="StaffLoginRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_State_StaffLogin" Association="Self.FK_State_StaffLogin">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+    <AssociationSet Name="HotelCategory_FK" Association="Self.HotelCategory_FK">
+      <End Role="HotelCategory" EntitySet="HotelCategory" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="Package_FK" Association="Self.Package_FK">
+      <End Role="Package" EntitySet="Package" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+    <AssociationSet Name="Package_FK\" Association="Self.Package_FK\">
+      <End Role="Package" EntitySet="Package" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="UpdatedBy_FK" Association="Self.UpdatedBy_FK">
+      <End Role="StaffLogin" EntitySet="StaffLogin" />
+      <End Role="Enquiry" EntitySet="Enquiry" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -261,8 +261,10 @@ namespace ProjectAPI.Controllers.api
 
         public class ArrivalBookingFilterModel
         {
+            public int Years { get; set; }
             public int Months { get; set; }
         }
+
         [HttpPost]
         [Route("ArrivalBookingList")]
         public ExpandoObject ArrivalBookingList(RequestModel requestModel)
@@ -278,50 +280,56 @@ namespace ProjectAPI.Controllers.api
                     string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
                     ArrivalBookingFilterModel model = JsonConvert.DeserializeObject<ArrivalBookingFilterModel>(decryptData);
 
-                    DateTime today = DateTime.Today; // ✅ Today’s date (ignores time)
+                    var today = DateTime.Today;
+                    int currentMonth = today.Month;
+                    int currentYear = today.Year;
 
-                    int currentMonth = DateTime.Today.Month;
+                    // ✅ Determine which year to use: user-specified OR current year
+                    int filterYear = model.Years > 0 ? model.Years : currentYear;
 
                     var list = db.Bookings
                         .Where(a =>
-                            (a.ArivalDate != null && a.ArivalDate.Month == currentMonth) &&
-                            (model.Months == 0 || (a.CreatedOn.HasValue && a.CreatedOn.Value.Month == model.Months))
-                        ).Select(a => new
-                     {
-                         a.ArivalDate,
-                         a.BookingId,
-                         a.BookingCode,
-                         a.BookingDate,
-                         a.EnquiryId,
-                         EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
-                         a.AgentId,
-                         AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
-                         a.FlightOption,
-                         a.DestinationId,
-                         DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
-                         a.PackageId,
-                         PackageName = a.Package != null ? a.Package.PackageName : "",
-                         a.HotelCategoryId,
-                         HotelCategoryName = a.HotelCategory.HotelCategoryName,
-                         a.NoOfDay,
-                         TravelPlanDate = a.ArivalDate,
-                         a.DepartureDate,
-                         a.NoOfPerson,
-                         AmountQuoted = a.Rate,
-                         a.NoOfRoom,
-                         a.TotalAmount,
-                         a.BookingStatus,
-                         a.CreatedBy,
-                         StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
-                      ? a.StaffLogin.Staff.StaffName : "",
-                         a.CreatedOn,
-                         a.MealPlan,
-                         a.UpdatedBy,
-                         a.UpdatedOn,
-                     })
-     .OrderBy(x => x.ArivalDate)   // ✅ Sorted by latest arrival date
-     .ToList();
-
+                            // ✅ Year filter
+                            a.ArivalDate.Year == filterYear &&
+                            // ✅ Month filter (only if user selected month)
+                            (model.Months > 0 ? a.ArivalDate.Month == model.Months
+                                              : a.ArivalDate.Month == currentMonth)
+                        )
+                        .Select(a => new
+                        {
+                            a.ArivalDate,
+                            a.BookingId,
+                            a.BookingCode,
+                            a.BookingDate,
+                            a.EnquiryId,
+                            EnquiryCode = a.Enquiry != null ? a.Enquiry.EnquiryCode : "",
+                            a.AgentId,
+                            AgentName = a.Agent != null ? a.Agent.ContactPersonName : "",
+                            a.FlightOption,
+                            a.DestinationId,
+                            DestinationName = a.Destination != null ? a.Destination.DestinationName : "",
+                            a.PackageId,
+                            PackageName = a.Package != null ? a.Package.PackageName : "",
+                            a.HotelCategoryId,
+                            HotelCategoryName = a.HotelCategory.HotelCategoryName,
+                            a.NoOfDay,
+                            TravelPlanDate = a.ArivalDate,
+                            a.DepartureDate,
+                            a.NoOfPerson,
+                            AmountQuoted = a.Rate,
+                            a.NoOfRoom,
+                            a.TotalAmount,
+                            a.BookingStatus,
+                            a.CreatedBy,
+                            StaffName = a.StaffLogin != null && a.StaffLogin.Staff != null
+                                ? a.StaffLogin.Staff.StaffName : "",
+                            a.CreatedOn,
+                            a.MealPlan,
+                            a.UpdatedBy,
+                            a.UpdatedOn,
+                        })
+                        .OrderBy(x => x.ArivalDate)   // ✅ Nearest date first
+                        .ToList();
 
                     res.ArrivalBookingList = list;
                     res.Message = ConstantData.SuccessMessage;
@@ -333,6 +341,7 @@ namespace ProjectAPI.Controllers.api
             }
             return res;
         }
+
 
         [HttpPost]
         [Route("EditBookingList")]

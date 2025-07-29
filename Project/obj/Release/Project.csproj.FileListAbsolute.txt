@@ -1,0 +1,12 @@
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\Project.dll.config
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\Project.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\Project.pdb
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\EntityFramework.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\EntityFramework.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Release\Project.csproj.AssemblyReference.cache
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Release\Project.csproj.CoreCompileInputs.cache
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Release\Project.csproj.CopyComplete
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Release\Project.dll
+C:\Users\ANIRUDDH SHARMA\Desktop\Akash-Ganga-Travels\Server\Project\obj\Release\Project.pdb

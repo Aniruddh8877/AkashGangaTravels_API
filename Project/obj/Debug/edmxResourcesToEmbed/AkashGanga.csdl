@@ -104,6 +104,10 @@
       <End Role="StaffLogin" EntitySet="StaffLogins" />
       <End Role="Destination" EntitySet="Destinations" />
     </AssociationSet>
+    <AssociationSet Name="FK_HotelCategory_Destination" Association="AkashGangaTravelModel.FK_HotelCategory_Destination">
+      <End Role="Destination" EntitySet="Destinations" />
+      <End Role="HotelCategory" EntitySet="HotelCategories" />
+    </AssociationSet>
     <AssociationSet Name="FK_Package_Destination" Association="AkashGangaTravelModel.FK_Package_Destination">
       <End Role="Destination" EntitySet="Destinations" />
       <End Role="Package" EntitySet="Packages" />
@@ -371,6 +375,7 @@
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.Destination_FK" FromRole="Destination" ToRole="Enquiry" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.FK_Destination_StaffLogin" FromRole="Destination" ToRole="StaffLogin" />
     <NavigationProperty Name="StaffLogin1" Relationship="AkashGangaTravelModel.FK_Destination_StaffLogin1" FromRole="Destination" ToRole="StaffLogin" />
+    <NavigationProperty Name="HotelCategories" Relationship="AkashGangaTravelModel.FK_HotelCategory_Destination" FromRole="Destination" ToRole="HotelCategory" />
     <NavigationProperty Name="Packages" Relationship="AkashGangaTravelModel.FK_Package_Destination" FromRole="Destination" ToRole="Package" />
   </EntityType>
   <EntityType Name="District">
@@ -389,6 +394,7 @@
     <Property Name="EnquiryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="DestinationId" Type="Int32" Nullable="false" />
     <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="GuestId" Type="Int32" Nullable="false" />
     <Property Name="TravelPlanDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FlightOption" Type="Byte" Nullable="false" />
     <Property Name="NoOfRoom" Type="Int32" />
@@ -406,7 +412,6 @@
     <Property Name="UpdatedBy" Type="Int32" />
     <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
     <Property Name="EnquiryCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="GuestId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.Enquiry_FK_" FromRole="Enquiry" ToRole="Booking" />
     <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.Destination_FK" FromRole="Enquiry" ToRole="Destination" />
     <NavigationProperty Name="StaffLogin" Relationship="AkashGangaTravelModel.CreatedBy_FK" FromRole="Enquiry" ToRole="StaffLogin" />
@@ -439,9 +444,11 @@
       <PropertyRef Name="HotelCategoryId" />
     </Key>
     <Property Name="HotelCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DestinationId" Type="Int32" Nullable="false" />
     <Property Name="HotelCategoryName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Status" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Bookings" Relationship="AkashGangaTravelModel.FK_Booking_HotelCategory" FromRole="HotelCategory" ToRole="Booking" />
+    <NavigationProperty Name="Destination" Relationship="AkashGangaTravelModel.FK_HotelCategory_Destination" FromRole="HotelCategory" ToRole="Destination" />
     <NavigationProperty Name="Enquiries" Relationship="AkashGangaTravelModel.HotelCategory_FK" FromRole="HotelCategory" ToRole="Enquiry" />
   </EntityType>
   <EntityType Name="IDType">
@@ -900,6 +907,18 @@
       </Principal>
       <Dependent Role="Destination">
         <PropertyRef Name="UpdatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelCategory_Destination">
+    <End Type="AkashGangaTravelModel.Destination" Role="Destination" Multiplicity="1" />
+    <End Type="AkashGangaTravelModel.HotelCategory" Role="HotelCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Destination">
+        <PropertyRef Name="DestinationId" />
+      </Principal>
+      <Dependent Role="HotelCategory">
+        <PropertyRef Name="DestinationId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

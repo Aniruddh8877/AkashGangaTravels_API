@@ -32,14 +32,20 @@ namespace ProjectAPI.Controllers.api
                     HotelCategory model = JsonConvert.DeserializeObject<HotelCategory>(decryptData);
 
                     var list = dbContext.HotelCategories
-                        .Where(h => model.HotelCategoryId == 0 || h.HotelCategoryId == model.HotelCategoryId)
-                        .Select(s => new
-                        {
-                            s.HotelCategoryId,
-                            s.HotelCategoryName,
-                            s.Status,
-                        })
-                        .ToList();
+                    .Where(h =>
+                        (model.HotelCategoryId == 0 || h.HotelCategoryId == model.HotelCategoryId) &&
+                        (model.DestinationId == 0 || h.DestinationId == model.DestinationId)
+                     )
+                    .Select(s => new
+                    {
+                        s.HotelCategoryId,
+                        s.HotelCategoryName,
+                        s.DestinationId,
+                        s.Destination.DestinationName,
+                        s.Status,
+                    })
+                    .ToList();
+
 
                     res.HotelCategoryList = list;
                     res.Message = ConstantData.SuccessMessage;
@@ -95,8 +101,8 @@ namespace ProjectAPI.Controllers.api
         }
 
         [HttpPost]
-        [Route("saveHotelCateogry")]
-        public ExpandoObject saveHotelCateogry(RequestModel requestModel)
+        [Route("saveHotelCategory")]
+        public ExpandoObject saveHotelCategory(RequestModel requestModel)
         {
             dynamic response = new ExpandoObject();
             try
@@ -123,6 +129,7 @@ namespace ProjectAPI.Controllers.api
                         }
 
                         hotelCategory.HotelCategoryName = model.HotelCategoryName;
+                        hotelCategory.DestinationId = model.DestinationId;
                         hotelCategory.Status = model.Status;
                     }
                     else

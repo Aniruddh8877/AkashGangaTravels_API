@@ -157,7 +157,6 @@
     <EntitySetMapping Name="Enquiries">
       <EntityTypeMapping TypeName="AkashGangaTravelModel.Enquiry">
         <MappingFragment StoreEntitySet="Enquiry">
-          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
           <ScalarProperty Name="EnquiryCode" ColumnName="EnquiryCode" />
           <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
@@ -175,6 +174,7 @@
           <ScalarProperty Name="NoOfRoom" ColumnName="NoOfRoom" />
           <ScalarProperty Name="FlightOption" ColumnName="FlightOption" />
           <ScalarProperty Name="TravelPlanDate" ColumnName="TravelPlanDate" />
+          <ScalarProperty Name="GuestId" ColumnName="GuestId" />
           <ScalarProperty Name="PackageId" ColumnName="PackageId" />
           <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
           <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
@@ -203,6 +203,7 @@
         <MappingFragment StoreEntitySet="HotelCategory">
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="HotelCategoryName" ColumnName="HotelCategoryName" />
+          <ScalarProperty Name="DestinationId" ColumnName="DestinationId" />
           <ScalarProperty Name="HotelCategoryId" ColumnName="HotelCategoryId" />
         </MappingFragment>
       </EntityTypeMapping>

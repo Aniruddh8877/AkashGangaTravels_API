@@ -67,7 +67,7 @@ namespace ProjectAPI.Controllers.api
                     AppData.CheckAppKey(dbContext, appKey, (byte)KeyFor.Admin);
 
                     string decryptData = CryptoJs.Decrypt(requestModel.request, CryptoJs.key, CryptoJs.iv);
-                    var model = JsonConvert.DeserializeObject<Package>(decryptData);
+                   Package model = JsonConvert.DeserializeObject<Package>(decryptData);
 
                     var list = dbContext.Packages
                         .Where(p => model.DestinationId == 0 || p.DestinationId == model.DestinationId)

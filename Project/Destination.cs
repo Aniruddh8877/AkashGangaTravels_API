@@ -19,6 +19,7 @@ namespace Project
         {
             this.Bookings = new HashSet<Booking>();
             this.Enquiries = new HashSet<Enquiry>();
+            this.HotelCategories = new HashSet<HotelCategory>();
             this.Packages = new HashSet<Package>();
         }
     
@@ -37,6 +38,8 @@ namespace Project
         public virtual ICollection<Enquiry> Enquiries { get; set; }
         public virtual StaffLogin StaffLogin { get; set; }
         public virtual StaffLogin StaffLogin1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HotelCategory> HotelCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package> Packages { get; set; }
     }

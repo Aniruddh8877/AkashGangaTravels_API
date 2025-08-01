@@ -68,6 +68,10 @@ namespace ProjectAPI.Controllers.api
                         a.TravelPlanDate,
                         StaffName = a.StaffLogin.Staff.StaffName,
                         a.Title,
+                        a.Guest.GuestId,
+                        GuestName = a.Guest.GuestName,
+                       GuestMobileNo = a.Guest.MobileNo,
+                         GuestTitle = a.Guest.Title,
                         //a.IsPrimaryGuest,
                     })
                     .ToList();

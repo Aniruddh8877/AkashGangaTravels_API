@@ -22,11 +22,13 @@ namespace Project
         }
     
         public int HotelCategoryId { get; set; }
+        public int DestinationId { get; set; }
         public string HotelCategoryName { get; set; }
         public byte Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual Destination Destination { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enquiry> Enquiries { get; set; }
     }

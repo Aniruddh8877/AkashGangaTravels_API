@@ -23,6 +23,7 @@ namespace Project
         public int EnquiryId { get; set; }
         public int DestinationId { get; set; }
         public int PackageId { get; set; }
+        public int GuestId { get; set; }
         public System.DateTime TravelPlanDate { get; set; }
         public byte FlightOption { get; set; }
         public Nullable<int> NoOfRoom { get; set; }
@@ -40,7 +41,6 @@ namespace Project
         public Nullable<int> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
         public string EnquiryCode { get; set; }
-        public int GuestId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
